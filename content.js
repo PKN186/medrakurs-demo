@@ -1711,43 +1711,117 @@ window.MEDRAKURS_CONTENT = {
       "id": "doctor-01",
       "name": "Рассохин Дмитрий Фадеевич",
       "role": "врач остеопат",
-      "source": "https://ra-kurs86.ru/spetsialisty"
+      "source": "https://ra-kurs86.ru/spetsialisty",
+      "prodoctorov": {
+        "checkedAt": "2026-11-10",
+        "profileUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/523905-rassohin/",
+        "evidenceUrl": "https://prodoctorov.ru/hanty-mansiysk/osteopat/",
+        "experienceYears": 33,
+        "category": "Высшая категория",
+        "rating": null,
+        "reviews": 0
+      }
     },
     {
       "id": "doctor-02",
       "name": "Рапгоф Александр Александрович",
       "role": "врач мануальный терапевт",
-      "source": "https://ra-kurs86.ru/spetsialisty"
+      "source": "https://ra-kurs86.ru/spetsialisty",
+      "prodoctorov": {
+        "checkedAt": "2026-11-10",
+        "profileUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/523937-rapgof/",
+        "evidenceUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/523937-rapgof/",
+        "experienceYears": 19,
+        "category": "Вторая категория",
+        "rating": null,
+        "reviews": 0,
+        "education": [
+          "Санкт-Петербургский государственный педиатрический медицинский университет, лечебное дело, 2007 г."
+        ]
+      }
     },
     {
       "id": "doctor-03",
       "name": "Козловский Илья Вячеславович",
       "role": "Директор МЧУ \"Движение\". Врач травматолог-ортопед высшей квалификационной категории, врач мануальный терапевт ,врач остеопат ,врач физической и реабилитационной медицины.",
-      "source": "https://ra-kurs86.ru/spetsialisty"
+      "source": "https://ra-kurs86.ru/spetsialisty",
+      "prodoctorov": {
+        "checkedAt": "2026-11-10",
+        "profileUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/523998-kozlovskiy/",
+        "evidenceUrl": "https://prodoctorov.ru/hanty-mansiysk/osteopat/",
+        "experienceYears": 21,
+        "rating": 4.4,
+        "reviews": 6
+      }
     },
     {
       "id": "doctor-04",
       "name": "Станинец Иван Иванович",
       "role": "врач травматолог-ортопед, мануальный терапевт",
-      "source": "https://ra-kurs86.ru/spetsialisty"
+      "source": "https://ra-kurs86.ru/spetsialisty",
+      "prodoctorov": {
+        "checkedAt": "2026-11-10",
+        "profileUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/656663-staninec/",
+        "evidenceUrl": "https://prodoctorov.ru/hanty-mansiysk/travmatolog/",
+        "experienceYears": 12,
+        "rating": 3.1,
+        "reviews": 3
+      }
     },
     {
       "id": "doctor-05",
       "name": "Симанов Владимир Леонидович",
       "role": "врач хирург эндокринолог, флеболог",
-      "source": "https://ra-kurs86.ru/spetsialisty"
+      "source": "https://ra-kurs86.ru/spetsialisty",
+      "prodoctorov": {
+        "checkedAt": "2026-11-10",
+        "profileUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/561983-simanov/",
+        "evidenceUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/561983-simanov/",
+        "experienceYears": 24,
+        "category": "Высшая категория",
+        "rating": 5.0,
+        "reviews": 18,
+        "education": [
+          "Пермский государственный медицинский университет им. Е. А. Вагнера, лечебное дело, 2002 г.",
+          "Интернатура по хирургии, 2003 г."
+        ]
+      }
     },
     {
       "id": "doctor-06",
       "name": "Терентьев Александр Владимирович",
       "role": "врач психиатр-нарколог",
-      "source": "https://ra-kurs86.ru/spetsialisty"
+      "source": "https://ra-kurs86.ru/spetsialisty",
+      "prodoctorov": {
+        "checkedAt": "2026-11-10",
+        "profileUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/656513-terentev/",
+        "evidenceUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/656513-terentev/",
+        "experienceYears": 20,
+        "rating": null,
+        "reviews": 0,
+        "education": [
+          "Ханты-Мансийская государственная медицинская академия, лечебное дело, 2006 г."
+        ]
+      }
     },
     {
       "id": "doctor-07",
       "name": "Рубцова Эльвира Григорьевна",
       "role": "Врач дерматолог(детский),специалист по озонотерапии",
-      "source": "https://ra-kurs86.ru/spetsialisty"
+      "source": "https://ra-kurs86.ru/spetsialisty",
+      "prodoctorov": {
+        "checkedAt": "2026-11-10",
+        "profileUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/656455-rubcova/",
+        "evidenceUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/656455-rubcova/",
+        "experienceYears": 26,
+        "category": "Высшая категория",
+        "rating": null,
+        "reviews": 0,
+        "education": [
+          "Казанский государственный медицинский университет, педиатрия, 2000 г.",
+          "Повышение квалификации по дерматовенерологии, 2018 г."
+        ]
+      }
     },
     {
       "id": "doctor-08",
@@ -1765,13 +1839,33 @@ window.MEDRAKURS_CONTENT = {
       "id": "doctor-10",
       "name": "Пузина Ольга Павловна",
       "role": "врач лечебной физкультуры и спортивной медицины. Специалист по БОС",
-      "source": "https://ra-kurs86.ru/spetsialisty"
+      "source": "https://ra-kurs86.ru/spetsialisty",
+      "prodoctorov": {
+        "checkedAt": "2026-11-10",
+        "profileUrl": null,
+        "evidenceUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach-lechebnoy-fizkultury/",
+        "experienceYears": 18,
+        "rating": null,
+        "reviews": 0
+      }
     },
     {
       "id": "doctor-11",
       "name": "Ершов Евгений Геннадьевич",
       "role": "Врач‑хирург, высшая квалификационная категория, кандидат медицинских наук, доцент ХМГМА",
-      "source": "https://ra-kurs86.ru/spetsialisty"
+      "source": "https://ra-kurs86.ru/spetsialisty",
+      "prodoctorov": {
+        "checkedAt": "2026-11-10",
+        "profileUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/264468-ershov/",
+        "evidenceUrl": "https://prodoctorov.ru/hanty-mansiysk/vrach/264468-ershov/",
+        "experienceYears": 22,
+        "category": "Высшая категория · кандидат наук",
+        "rating": 1.6,
+        "reviews": 3,
+        "education": [
+          "Омская государственная медицинская академия, лечебное дело, 2004 г."
+        ]
+      }
     }
   ],
   "announcements": [
@@ -1808,5 +1902,12 @@ window.MEDRAKURS_CONTENT = {
       "request": "Рубцова Эльвира Григорьевна — детский дерматолог",
       "demo": false
     }
-  ]
+  ],
+  "map": {
+    "latitude": 61.001583,
+    "longitude": 69.055337,
+    "constructorId": "71f596759528073e6847ffb55fcc4586d68d166271741c041646d007edc25478",
+    "source": "https://ra-kurs86.ru/kontakty",
+    "checkedAt": "2026-11-10"
+  }
 };
