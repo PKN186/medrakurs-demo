@@ -1,0 +1,347 @@
+/* Contemporary health campaign. Shared tokens; functional components remain in styles.css.
+   Shape system: image panels 32px, contained cards 24px, fields 16px, actions full-pill.
+   The dark hero and contact panel are deliberate campaign endcaps of a light page. */
+:root{
+ --paper:#f6f7f6;--white:#fff;--ink:#151c19;--muted:#5d6862;--line:#dbe1dd;
+ --accent:#d83225;--hover:#b92319;--wash:#eaf0ec;--rose:#f9e5e0;--sage:#e8eeea;
+ --panel-radius:32px;--card-radius:24px;--field-radius:16px;
+ scroll-padding-top:96px;
+}
+body{font-size:16px;letter-spacing:-.015em}
+.wrap{max-width:1440px;padding-inline:clamp(24px,4.5vw,64px)}
+.section{padding-block:70px}
+h2{font-size:clamp(36px,4.25vw,60px);line-height:1.03;letter-spacing:-.06em;font-weight:530}
+.section-heading{align-items:flex-end;margin-bottom:32px;gap:36px}
+.section-heading>div{max-width:780px}
+.section-index{font-size:13px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--accent);margin-bottom:18px}
+.section-heading>.text-link{min-height:46px;gap:18px;font-size:14px;white-space:nowrap}
+.text-link{font-size:15px;letter-spacing:-.01em}
+.button{min-height:58px;border-radius:999px;padding:10px 12px 10px 24px;font-size:15px;font-weight:500;gap:22px;box-shadow:none;white-space:nowrap}
+.button.primary{background:var(--accent)}
+.button.primary:hover{background:var(--hover);box-shadow:0 9px 24px #d832251a;transform:translateY(-2px)}
+.button.secondary{border-color:var(--line);background:transparent}
+.action-icon{width:36px;height:36px}
+.button:active{transform:scale(.975)}
+.booking-link{border-radius:999px;min-height:46px;padding:11px 17px!important;font-size:14px;gap:18px;background:transparent}
+.booking-link:hover{background:var(--ink);color:var(--white);border-color:var(--ink)!important;transform:translateY(-2px)}
+.booking-link:hover>svg{color:inherit}
+.icon-button{width:44px;height:44px}
+.header{background:#f6f7f6f5;border-bottom:0;backdrop-filter:blur(18px)}
+.header-inner{min-height:80px;background:transparent;gap:24px}
+.brand-name{font-size:28px;letter-spacing:-1.6px;font-weight:670}
+.brand-name>span{font-size:9px;letter-spacing:.07em;color:var(--muted)}
+.brand-mark{width:35px;height:35px;transform:rotate(-7deg);gap:3px}
+.brand-mark i{border-radius:4px}
+.desktop-nav{gap:26px;font-size:14px}
+.desktop-nav a{position:relative}
+.desktop-nav a::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s var(--ease)}
+.desktop-nav a:hover::after{transform:scaleX(1)}
+.reading-toggle{border-radius:50%;width:42px;height:42px;background:var(--white);font-size:17px}
+.header-phone{font-size:15px;letter-spacing:-.4px}
+.header-phone>span{font-size:11px}
+
+/* A compact functional notice, rather than another pale card. */
+.announcement{background:var(--accent);color:var(--white);border:0}
+.announcement-inner{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:20px;min-height:66px;padding-block:10px}
+.announcement-label{color:var(--white);font-size:12px}
+.announcement-label .status-dot{background:var(--white)}
+.announcement-content{display:flex;align-items:center;gap:12px;min-height:40px;flex-wrap:nowrap}
+.announcement-tag{color:var(--white);border-color:#ffffff8c;font-size:11px;border-radius:999px;padding:4px 9px;line-height:1.4}
+.announcement-content p{font-size:15px;line-height:1.4;font-weight:500;letter-spacing:-.3px;min-width:0}
+.announcement .booking-link{background:var(--white);color:var(--ink);border-color:var(--white)!important;min-height:38px;padding:7px 13px!important;font-size:12px;white-space:nowrap}
+.announcement .booking-link svg{color:var(--accent)}
+.announcement .booking-link:hover{background:var(--ink);color:var(--white);border-color:var(--ink)!important}
+.announcement-controls{gap:5px;margin:0}
+.announcement-controls .icon-button{width:30px;height:30px;min-width:30px;border-color:#ffffff87;color:var(--white)}
+.announcement-controls .icon-button:hover{background:var(--white);color:var(--accent)}
+.announcement-controls #announcement-pause[aria-pressed=true]{background:var(--white);color:var(--accent);border-color:var(--white)}
+.announcement-controls>span{font-size:11px;color:var(--white)}
+.announcement-progress{background:var(--white);opacity:.7;height:2px}
+
+/* The hero is one photographic moment; the wording of the H1 is locked. */
+.hero.wrap{isolation:isolate;position:relative;display:flex;align-items:center;width:calc(100% - 36px);max-width:1404px;min-height:550px;margin:18px auto 0;padding:38px 46px;overflow:hidden;border-radius:var(--panel-radius);color:var(--white);background:#122019}
+.hero-media{position:absolute;inset:0;z-index:-2;overflow:hidden;transform:translate(var(--hero-x,0),var(--hero-y,0)) scale(1.03);transition:transform .8s var(--ease)}
+.hero-media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;animation:hero-photo-in 1.7s var(--ease) both}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#07120be6 0%,#07120b9c 42%,#07120b19 70%,transparent 100%);pointer-events:none}
+.hero-copy{width:64%;max-width:800px;position:relative;z-index:1}
+.hero .location{color:#f0f3f0;font-size:12px;letter-spacing:.01em;gap:10px;line-height:1.5}
+.hero .location>span{color:#e1e7e1}
+.hero h1{font-size:clamp(64px,6.55vw,94px);font-weight:530;line-height:1.01;letter-spacing:-.068em;margin:21px 0 23px;color:var(--white)}
+.hero h1>span{color:#ffaca0}
+.hero-description{font-size:17px;line-height:1.6;max-width:430px;color:#f4f6f3;letter-spacing:-.2px}
+.hero-actions{margin-top:26px;gap:12px;flex-wrap:nowrap}
+.hero-actions .button{min-height:58px;font-size:14px;gap:18px;padding-left:22px}
+.hero-actions .button.secondary{padding-left:20px;background:#15261a70;color:var(--white);border-color:#ffffff8c;backdrop-filter:blur(8px)}
+.hero-actions .button.secondary .action-icon{background:#ffffff21;width:32px;height:32px}
+.hero-actions .button.secondary:hover{background:var(--white);color:var(--ink);border-color:var(--white)}
+.hero-actions .button.secondary:hover .action-icon{background:var(--wash);color:var(--ink)}
+.hero-callback{font-size:12px;color:#f3f5f2;margin-top:17px;max-width:500px;line-height:1.6;gap:9px}
+.hero-callback svg{width:15px;height:15px}
+.quick-bar{width:calc(100% - 36px);max-width:1404px;margin-top:14px;background:var(--white);border:1px solid var(--line);border-radius:24px;gap:24px;padding:23px 30px;grid-template-columns:1fr 1fr 1fr}
+.quick-bar>a,.quick-bar>button{font-size:12px;line-height:1.5;min-height:47px}
+.quick-bar strong{font-size:15px;font-weight:500;margin-top:4px;letter-spacing:-.2px}
+.quick-bar>*+*{padding-left:30px;border-left:1px solid var(--line)}
+
+/* News has a lead story and two supporting stories. */
+#news-grid{display:grid;grid-template-columns:1.18fr 1fr;grid-template-rows:1fr 1fr;gap:16px}
+.news-card{position:relative;isolation:isolate;overflow:hidden;background:var(--white);border:1px solid var(--line);border-radius:var(--card-radius);padding:26px;min-width:0}
+#news-grid>.news-card{min-height:218px}
+#news-grid>.news-card:first-child{grid-row:1/3;min-height:452px}
+.news-topline{margin-bottom:18px;min-height:20px}
+.news-topline .eyebrow{font-size:12px;line-height:1.4;letter-spacing:0;text-transform:none;font-weight:500}
+.news-topline>svg{width:25px;height:25px}
+.news-card h3{font-size:27px;line-height:1.13;letter-spacing:-1px;max-width:500px;font-weight:530;margin-bottom:12px}
+.news-card>p{font-size:14px;line-height:1.65;margin-bottom:20px}
+.news-card .booking-link{width:fit-content;min-height:43px;font-size:13px;margin-top:auto}
+.news-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2;transition:transform .7s var(--ease)}
+.news-vision{color:var(--white);background:#1a1b17!important;border:0}
+.news-vision::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,#101710f5 0%,#101710ad 42%,#1017100d 78%);pointer-events:none}
+.news-vision:hover .news-media{transform:scale(1.045)}
+.news-vision .news-topline .eyebrow,.news-vision .news-topline svg,.news-vision>p{color:var(--white)}
+.news-vision .news-topline{margin-bottom:auto;padding-bottom:68px}
+.news-vision h3{font-size:36px;line-height:1.05;max-width:430px;letter-spacing:-1.6px;margin-bottom:18px}
+.news-vision>p{max-width:470px;font-size:14px;line-height:1.7}
+.news-vision .booking-link{background:var(--white);border-color:var(--white)!important;color:var(--ink)}
+.news-vision .booking-link>svg{color:var(--accent)}
+.news-vision .booking-link:hover{background:var(--accent);color:var(--white);border-color:var(--accent)!important}
+.news-vision .booking-link:hover>svg{color:var(--white)}
+.news-dialog .news-grid{gap:16px}
+.news-dialog .news-card{min-height:300px}
+.news-dialog .news-vision h3{font-size:29px}
+
+/* One featured direction, five quick entries. No wall of equal cards. */
+.directions{padding-top:26px}
+.care-search{border-radius:24px;padding:24px 28px;margin-bottom:26px;background:var(--white);border-color:var(--line)}
+.care-search-label{font-size:19px;letter-spacing:-.6px}
+.care-search-input-wrap{min-height:62px;padding-bottom:12px}
+.care-search-input-wrap input{font-size:18px;letter-spacing:-.3px}
+.search-suggestions button{min-height:35px;padding-inline:13px;font-size:12px}
+.search-suggestions button:hover,.search-suggestions button[aria-pressed=true]{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.direction-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:0 30px;grid-auto-flow:row}
+.direction-card{position:relative;min-height:110px;padding:20px 8px;display:grid;grid-template-columns:46px 1fr;gap:20px;align-items:center;background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;transform:none;text-align:left}
+.direction-card:nth-child(4){background:transparent}
+.direction-card:not(.vision-card):hover{background:transparent;border-color:var(--line);transform:translateX(5px)}
+.direction-card:not(.vision-card):hover .card-title{color:var(--accent)}
+.direction-card .card-top{width:46px;height:46px;display:grid;place-items:center;background:var(--white);border-radius:50%;gap:0}
+.card-index{display:none}
+.direction-card .card-top>svg{width:25px;height:25px;stroke-width:1.4}
+.card-bottom{padding-right:32px}
+.card-title{font-size:25px;line-height:1.2;font-weight:530;letter-spacing:-.9px}
+.card-description{font-size:14px;line-height:1.6;min-height:0;margin-top:6px;max-width:450px}
+.direction-card>.card-arrow{right:6px;top:calc(50% - 10px);bottom:auto;width:20px;height:20px}
+.direction-card.vision-card{display:flex;align-items:flex-start;grid-row:1/6;grid-column:1;min-height:550px;padding:30px;background:var(--accent);color:var(--white);border:0;border-radius:var(--panel-radius);overflow:hidden;isolation:isolate}
+.direction-card.vision-card:hover{background:var(--hover);transform:none;border-color:transparent}
+.vision-card .card-top{width:100%;height:auto;border-radius:0;background:transparent;display:block}
+.vision-card .card-index{display:block;font-size:0;color:transparent}
+.vision-card .direction-badge{display:inline-block;font-size:12px;font-weight:400;letter-spacing:0;color:var(--white);border-color:#ffffff9c;border-radius:999px;padding:7px 12px;margin:0;background:transparent}
+.vision-card .card-top>svg{position:absolute;top:110px;left:8%;width:84%;height:205px;stroke:var(--white);stroke-width:1;opacity:.4;transition:transform .7s var(--ease)}
+.vision-card:hover .card-top>svg{transform:scale(1.07) rotate(-4deg)}
+.vision-card .card-bottom{position:absolute;bottom:38px;left:30px;right:30px;padding-right:34px}
+.vision-card .card-title{font-size:38px;line-height:1.04;letter-spacing:-1.9px;font-weight:530;max-width:360px}
+.vision-card .card-description{font-size:15px;line-height:1.6;max-width:280px;color:var(--white);margin-top:20px}
+.vision-card>.card-arrow{top:auto;right:27px;bottom:32px;padding:13px;width:48px;height:48px;border-radius:50%;background:var(--white);color:var(--accent)}
+.vision-card:hover>.card-arrow{transform:rotate(45deg)}
+.specialty-links{margin-top:25px;gap:9px}
+.specialty-links button{background:transparent;font-size:13px;min-height:42px;padding:9px 16px}
+.specialty-links button:hover{background:var(--white);border-color:var(--ink)}
+
+/* People are an editorial feature, not a second catalog grid. */
+.doctors{background:var(--wash);border-radius:var(--panel-radius);width:calc(100% - 36px);max-width:1404px;margin:auto}
+.doctors>.wrap{padding-inline:40px}
+.doctors-editorial{display:grid;grid-template-columns:.84fr 1.16fr;gap:46px;align-items:stretch}
+.doctors-photo{position:relative;min-height:570px;overflow:hidden;background:#dce7df;border-radius:var(--card-radius);display:flex;align-items:center;justify-content:center}
+.doctors-photo>img{position:absolute;width:122%;max-width:none;height:88%;object-fit:contain;object-position:center top;top:32px;left:-11%}
+.doctors-photo::after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(0deg,#dce7df 5%,#dce7df00 100%);pointer-events:none}
+.doctors-photo-caption{position:absolute;inset:auto 27px 29px;z-index:1}
+.doctors-photo-caption>p{font:530 30px/1.1 var(--display);letter-spacing:-1.1px;margin-bottom:20px}
+.doctors-photo-caption .button{background:var(--white);font-size:13px;min-height:50px;padding-left:18px;gap:15px;border:0}
+.doctors-photo-caption .action-icon{width:31px;height:31px}
+.doctors-grid{display:flex;flex-direction:column;gap:0}
+.doctor-card{padding:24px 0;background:transparent;border:0;border-bottom:1px solid #cbd5cd;border-radius:0;display:grid;grid-template-columns:1fr auto;gap:0 18px}
+.doctor-card:first-child{padding-top:3px}
+.doctor-card:last-child{border-bottom:0;padding-bottom:0}
+.doctor-identity{grid-column:1;margin:0 0 9px;align-items:flex-start}
+.doctor-initials{display:none}
+.doctor-card h3{font-size:28px;line-height:1.2;letter-spacing:-1px;font-weight:530}
+.doctor-specialty{font-size:13px;line-height:1.5;color:var(--accent);margin-top:6px}
+.doctor-card>p{grid-column:1/-1;font-size:13px;line-height:1.65;margin:0 0 13px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;max-width:640px}
+.doctor-card .doctor-facts{grid-column:1/-1;margin:0}
+.doctor-credentials{margin-bottom:8px;gap:6px}
+.doctor-credentials>span{background:#ffffffb8;border-radius:999px;font-size:11px;padding:4px 9px}
+.doctor-rating{font-size:12px;gap:8px}
+.doctor-rating strong{font-size:17px}
+.doctor-education{font-size:12px;margin-top:7px}
+.doctor-education summary{padding-block:2px}
+.doctor-card>.booking-link{grid-column:2;grid-row:1;align-self:start;width:auto;min-height:39px;font-size:0!important;padding:9px!important;border-radius:50%;width:40px;height:40px;gap:0;background:var(--white);margin-top:2px}
+.doctor-card>.booking-link>svg{width:19px;height:19px}
+.doctor-card>.booking-link:hover{background:var(--ink)}
+.doctor-card>p{font-size:14px}
+.doctor-credentials>span{font-size:12px}
+.doctor-rating{font-size:13px}
+.doctor-rating>.rating-source{font-size:12px}
+.doctors-note{font-size:13px;line-height:1.7;margin-top:28px;max-width:740px}
+
+/* A simple three-step journey with a distinctive transition to contacts. */
+.care-steps{gap:35px}
+.care-steps li{border-top:1px solid var(--line);padding-top:26px}
+.step-number{font:500 44px/1 var(--display);letter-spacing:-2px;color:var(--accent);margin-bottom:24px}
+.care-steps h3{font-size:26px;line-height:1.2;font-weight:530;letter-spacing:-1px;margin-bottom:14px}
+.care-steps p{font-size:15px;line-height:1.7}
+.care-action{margin-top:34px;gap:28px}
+.demo-hint{font-size:13px;line-height:1.6}
+.contacts{background:var(--ink);color:var(--white);width:calc(100% - 36px);max-width:1404px;margin:auto;border-radius:var(--panel-radius);padding-block:50px}
+.contacts>.wrap{padding-inline:40px}
+.contact-grid{grid-template-columns:1.1fr 1fr;gap:32px;align-items:center}
+.contacts .section-index{color:#ffaca0}
+.contacts h2{font-size:clamp(40px,4.35vw,62px);line-height:1.04}
+.contact-phone{font-size:clamp(28px,3vw,43px);font-weight:500;letter-spacing:-1.6px;margin-top:30px}
+.contact-phone:hover{color:#ffaca0}
+.contact-links{gap:20px;margin-top:25px}
+.contact-links>a{font-size:13px;color:var(--white)}
+.contact-links>a:hover{color:#ffaca0}
+.address-card{border-radius:var(--card-radius);padding:28px;background:var(--white);color:var(--ink)}
+.address-card h3{font-size:27px;font-weight:530}
+.address-card>p,.address-card .address-note{color:var(--muted)}
+.address-card .button.dark{background:var(--accent);color:var(--white)}
+.address-card .button.dark:hover{background:var(--hover)}
+.visit-details{margin-top:20px;padding-top:17px;gap:14px}
+.clinic-map{background:var(--white);color:var(--ink);border:0;border-radius:var(--card-radius)}
+.map-heading{padding:23px 26px}
+.map-heading h3{font-size:23px;font-weight:530}
+.map-heading .eyebrow{text-transform:none;font-size:12px;letter-spacing:0}
+.map-toolbar{padding:16px 26px}
+.footer{padding-block:38px 28px}
+.footer-main{align-items:center;gap:25px}
+.footer-wordmark{font-size:clamp(36px,6vw,84px);letter-spacing:-.065em;font-weight:600}
+.footer-wordmark>span{font-size:.75em}
+.footer-main>div{font-size:12px}
+.concept-label{border-radius:999px;font-size:10px;padding:7px 12px}
+.footer-meta{padding-block:25px;gap:25px}
+.medical-note{font-size:18px;line-height:1.5}
+
+/* Every dialog uses the same material and shape rules. */
+dialog{border-radius:28px;border-color:var(--line);background:var(--paper);box-shadow:0 30px 100px #12201933}
+dialog::backdrop{background:#0e171a80;backdrop-filter:blur(8px)}
+.dialog-top{background:var(--paper)}
+dialog h2{font-size:39px;letter-spacing:-1.7px;font-weight:530}
+.search-field,.field input,.field select,.category-field select{border-radius:var(--field-radius);border-color:#bfcac3}
+.search-field{padding:14px 17px}
+.field input,.field select{font-size:16px}
+.demo-badge{border-radius:999px;color:#81352c;border-color:#d7b9b0;background:var(--rose);padding:5px 10px}
+.max-live,.max-preview{border-radius:24px;border-color:var(--line)}
+.max-live-message{border-radius:18px;background:var(--white)}
+.max-live-top strong{font-size:20px}
+.max-logo{border-radius:14px;background:var(--ink)}
+.max-live-message dd{font-size:15px}
+.max-live-demo{font-size:11px}
+.booking-main h2{font-size:38px}
+.booking-main .form-demo-note>p,.booking-main .form-demo-note .text-link{font-size:12px}
+.price-filters button,.catalog-filters button{border-radius:999px}
+.price-document-view{border-radius:18px}
+.price-source{font-size:12px}
+.price-row h3{font-size:20px;letter-spacing:-.5px}
+.price-amount{font-size:24px}
+.organization-facts{font-size:15px}
+.mobile-book{background:#f6f7f6f5;backdrop-filter:blur(18px)}
+.mobile-book .button{border-radius:999px}
+.mobile-call{border-radius:50%}
+
+@keyframes hero-photo-in{from{transform:scale(1.07)}to{transform:scale(1)}}
+@supports not (backdrop-filter:blur(8px)){.header,.mobile-book{background:var(--paper)}.hero-actions .button.secondary{background:#18271e}}
+@media(min-width:1500px){.hero.wrap{min-height:600px;padding-inline:54px}.hero h1{font-size:98px}}
+@media(max-width:1100px){
+ .header-inner{gap:20px}.desktop-nav{gap:20px}.brand-name{font-size:26px}.header-actions{gap:9px}
+ .announcement-inner{gap:12px}.announcement-label{display:none}.announcement-inner{grid-template-columns:minmax(0,1fr) auto auto}
+ .hero.wrap{min-height:530px;padding:35px}.hero-copy{width:67%}.hero h1{font-size:clamp(64px,6.7vw,78px)}
+ .hero-actions .button{font-size:13px;padding-left:17px;gap:12px}.hero-description{font-size:16px;max-width:380px}
+ .quick-bar{padding-inline:24px;gap:20px}.quick-bar>*+*{padding-left:20px}
+ #news-grid{grid-template-columns:1.05fr 1fr}.news-card{padding:24px}.news-vision h3{font-size:32px}
+ .direction-grid{gap:0 24px}.vision-card .card-title{font-size:32px}.card-title{font-size:23px}
+ .doctors-editorial{grid-template-columns:.8fr 1.2fr;gap:28px}.doctors>.wrap{padding-inline:30px}.doctor-card h3{font-size:25px}
+ .doctors-photo-caption>p{font-size:26px}.doctors-photo-caption{inset:auto 22px 25px}.doctors-photo-caption .button{font-size:12px;gap:10px;padding-left:16px}
+ .contacts>.wrap{padding-inline:30px}.contact-grid{gap:25px}.contact-links{gap:15px}.contact-links>a{font-size:12px}
+}
+@media(max-width:900px){
+ .header-inner{min-height:72px}.header-actions{gap:10px}.desktop-nav{display:none}
+ .section{padding-block:54px}.directions{padding-top:15px}.section-index{font-size:13px;margin-bottom:15px}
+ .hero.wrap{min-height:530px;margin-top:14px;width:calc(100% - 28px);padding:32px;border-radius:28px}
+ .hero-copy{width:74%}.hero h1{font-size:clamp(58px,7.3vw,69px)}.hero-description{font-size:16px;max-width:360px}
+ .hero::after{background:linear-gradient(90deg,#07120be8,#07120b9c 55%,#07120b10 100%)}
+ .hero-actions{flex-wrap:wrap;gap:10px}.hero-actions .button{min-height:54px;font-size:13px}.hero .location{font-size:11px}
+ .quick-bar{width:calc(100% - 28px);padding:20px 22px;gap:16px;grid-template-columns:1fr 1fr}
+ .quick-bar>button:last-child{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);padding:17px 0 0;margin-top:1px;justify-content:space-between;min-height:40px}
+ .quick-bar strong{font-size:14px}.quick-bar>*+*{padding-left:18px}
+ #news-grid{grid-template-columns:1fr 1fr}.news-card{padding:23px}.news-card h3{font-size:24px}.news-card>p{font-size:14px}.news-vision h3{font-size:29px}.news-vision .news-topline{padding-bottom:30px}
+ .news-card .booking-link{font-size:12px;padding-inline:14px!important}.news-topline{flex-direction:row}
+ .direction-grid{grid-template-columns:.9fr 1.1fr;gap:0 24px}.direction-card{min-height:117px;padding-block:18px;gap:13px;grid-template-columns:38px 1fr}
+ .direction-card .card-top{width:38px;height:38px}.direction-card .card-top>svg{width:23px;height:23px}.card-title{font-size:21px}.card-description{font-size:13px}
+ .direction-card.vision-card{padding:25px;min-height:585px}.vision-card .card-title{font-size:30px}.vision-card .card-description{font-size:14px;max-width:215px}.vision-card .card-bottom{left:25px;right:25px;bottom:40px;padding:0}.vision-card>.card-arrow{right:22px;bottom:22px;width:39px;height:39px;padding:10px}.vision-card .card-top>svg{top:140px;left:8%;width:84%;height:200px}
+ .doctors{width:calc(100% - 28px)}.doctors>.wrap{padding-inline:26px}.doctors-editorial{gap:25px;grid-template-columns:.75fr 1.25fr}
+ .doctors-photo{min-height:570px}.doctors-photo>img{width:170%;left:-35%;height:80%;object-position:center top}.doctors-photo-caption{inset:auto 18px 22px}.doctors-photo-caption>p{font-size:23px}.doctors-photo-caption .button{white-space:normal;font-size:12px;line-height:1.5;gap:6px;padding-left:14px}.doctors-photo-caption .action-icon{width:26px;height:26px}
+ .doctor-card h3{font-size:23px}.doctor-card{gap:0 12px;padding-block:22px}.doctor-card>p{font-size:12px;-webkit-line-clamp:2}.doctor-specialty{font-size:12px}.doctor-credentials>span{font-size:11px}.doctor-card>.booking-link{width:35px;height:35px;min-height:35px;padding:7px!important}
+ .care-steps{gap:22px}.care-steps h3{font-size:23px}.care-steps p{font-size:14px}.step-number{font-size:37px}
+ .contacts{width:calc(100% - 28px);padding-block:35px}.contacts>.wrap{padding-inline:26px}.contact-grid{grid-template-columns:1fr;gap:28px}.contacts h2{font-size:52px}.contact-phone{font-size:36px}.contact-links>a{font-size:14px}.address-card{padding:26px}.visit-details{grid-template-columns:1fr 1fr}.address-card .button{width:fit-content;padding-right:12px;gap:35px}.clinic-map{grid-column:1}.footer-wordmark{font-size:46px}.footer-main{flex-wrap:wrap}.footer-main>div{margin-left:0}.concept-label{margin-left:auto}
+}
+@media(max-width:600px){
+ :root{scroll-padding-top:88px}
+ .wrap{padding-inline:22px}.header-inner{min-height:72px;gap:12px}.brand-name{font-size:24px}.brand-mark{width:29px;height:29px}.brand-name>span{font-size:8px}.header-actions{gap:3px}.reading-toggle{width:35px;height:35px;font-size:16px}.menu-toggle{width:34px;height:38px}
+ .mobile-menu:not([hidden]){max-height:calc(100dvh - 72px);background:var(--paper);padding-bottom:22px}.mobile-menu>.button{font-size:15px}
+ .announcement-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"message message" "action controls";gap:7px 12px;padding-block:11px;min-height:0}
+ .announcement-content{grid-area:message;display:grid;grid-template-columns:1fr;gap:4px;min-height:76px;align-content:start}
+ .announcement-tag{padding:0;border:0;font-size:11px;color:var(--white);line-height:1.5;display:block}
+ .announcement-content p{font-size:15px;line-height:1.4;min-width:0;font-weight:500}
+ #announcement-book{grid-area:action;justify-self:start}.announcement .booking-link{min-height:33px;font-size:11px;padding:6px 11px!important;gap:10px}
+ .announcement-controls{grid-area:controls;gap:4px}.announcement-controls .icon-button{width:29px;height:29px;min-width:29px}.announcement-controls>span{font-size:11px}
+ .hero.wrap{width:calc(100% - 20px);margin-top:10px;min-height:620px;display:flex;align-items:flex-end;padding:26px 24px;border-radius:26px}
+ .hero-copy{width:100%;max-width:none}.hero-media img{object-position:70% center}.hero::after{background:linear-gradient(0deg,#07120bf7 0%,#07120be8 30%,#07120b7d 65%,#07120b10 100%)}
+ .hero .location{position:absolute;bottom:calc(100% + 86px);left:0;max-width:240px;font-size:11px;line-height:1.5;color:var(--white);display:none}
+ .hero h1{font-size:clamp(47px,12.8vw,68px);line-height:1.01;letter-spacing:-.062em;max-width:360px;margin:0 0 20px;font-weight:550}
+ .hero-description{font-size:15px;line-height:1.6;max-width:310px;color:#f4f6f3}
+ .hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:23px}
+ .hero-actions .button,.hero-actions .button.secondary{width:100%;font-size:14px;min-height:53px;padding-left:20px;gap:14px}
+ .hero-actions .action-icon,.hero-actions .button.secondary .action-icon{width:31px;height:31px}
+ .button{white-space:normal;text-align:left}
+ .hero-callback{font-size:11px;line-height:1.6;max-width:300px;margin-top:14px;gap:8px;color:#f3f5f2}
+ .hero-callback svg{width:14px;height:14px}
+ .quick-bar{width:calc(100% - 20px);grid-template-columns:1fr;gap:0;margin-top:10px;padding:6px 22px;border-radius:22px}
+ .quick-bar>a,.quick-bar>button{font-size:11px;min-height:80px;padding:15px 0;gap:14px}.quick-bar strong{font-size:14px;margin-top:2px}.quick-bar>*+*{border-left:0;border-top:1px solid var(--line)}.quick-bar>button:last-child{grid-column:auto;margin:0;min-height:76px;padding:15px 0}
+ .section{padding-block:46px}.directions{padding-top:12px}.section-heading{display:block;margin-bottom:25px}.section-index{font-size:12px;margin-bottom:14px}h2{font-size:37px;line-height:1.05;letter-spacing:-1.8px}.section-heading>.text-link{display:inline-flex;font-size:13px;min-height:40px;margin-top:19px}
+ #news-grid{display:flex;flex-direction:column;gap:14px}#news-grid>.news-card{min-height:0;padding:25px}#news-grid>.news-card:first-child{min-height:440px;padding:25px}
+ .news-topline .eyebrow{font-size:12px}.news-topline{margin-bottom:20px}.news-card h3{font-size:27px;line-height:1.12;letter-spacing:-.9px}.news-card>p{font-size:14px;line-height:1.7}.news-card .booking-link{font-size:13px;min-height:43px;padding-inline:16px!important}.news-vision h3{font-size:32px;line-height:1.06;letter-spacing:-1.1px}.news-vision .news-topline{padding-bottom:75px}.news-vision>p{font-size:13px;line-height:1.7}.news-media{object-position:58% center}
+ .care-search{padding:22px 20px;border-radius:22px;margin-bottom:22px}.care-search-label{font-size:18px;margin-bottom:11px}.care-search-input-wrap{min-height:55px;gap:11px}.care-search-input-wrap input{font-size:16px}.care-search-bottom{gap:12px}.search-suggestions button{font-size:12px;padding-inline:10px;min-height:34px}.care-search-results .result-name{font-size:19px}
+ .direction-grid{display:flex;flex-direction:column;gap:0}.direction-card.vision-card{min-height:390px;margin-bottom:16px;padding:26px;border-radius:26px}.vision-card .card-top>svg{top:65px;left:auto;right:18px;width:190px;height:140px;opacity:.4}.vision-card .card-bottom{left:26px;right:26px;bottom:35px;padding-right:30px}.vision-card .card-title{font-size:36px;line-height:1.04;max-width:280px}.vision-card .card-description{max-width:235px;font-size:14px;line-height:1.55;margin-top:17px}.vision-card .direction-badge{font-size:11px;padding:6px 11px}.vision-card>.card-arrow{width:44px;height:44px;padding:12px;right:24px;bottom:27px}
+ .direction-card:not(.vision-card){padding:22px 0;min-height:105px;grid-template-columns:42px 1fr;gap:15px;border-radius:0}.direction-card .card-top{width:42px;height:42px}.direction-card .card-top>svg{width:25px;height:25px}.card-title{font-size:23px;letter-spacing:-.75px}.card-description{font-size:13px;line-height:1.65;max-width:250px;min-height:0}.card-bottom{padding-right:27px}.direction-card>.card-arrow{right:0;width:18px;height:18px}.specialty-links{gap:8px;margin-top:24px}.specialty-links button{font-size:12px;min-height:40px;padding-inline:13px}
+ .doctors{width:calc(100% - 20px);border-radius:26px}.doctors>.wrap{padding-inline:22px}.doctors-editorial{display:flex;flex-direction:column;gap:28px}.doctors-photo{min-height:420px;border-radius:22px}.doctors-photo>img{height:96%;width:114%;left:-7%;top:12px}.doctors-photo::after{inset:50% 0 0}.doctors-photo-caption{inset:auto 24px 25px}.doctors-photo-caption>p{font-size:29px;letter-spacing:-1.2px;margin-bottom:17px}.doctors-photo-caption .button{font-size:13px;min-height:48px;white-space:nowrap;gap:14px}.doctors-photo-caption .action-icon{width:30px;height:30px}
+ .doctor-card{padding-block:26px;gap:0 14px}.doctor-card h3{font-size:25px;letter-spacing:-.85px}.doctor-specialty{font-size:12px}.doctor-card>p{font-size:13px;margin:3px 0 14px;-webkit-line-clamp:3}.doctor-card>.booking-link{width:39px;height:39px;min-height:39px}.doctor-credentials>span{font-size:12px}.doctor-rating,.doctor-rating.no-reviews>span:first-child{font-size:12px}.doctor-rating>.rating-source{font-size:11px}.doctor-education{font-size:12px}.doctors-note{font-size:12px;line-height:1.75;margin-top:25px}
+ .care-steps{display:flex;flex-direction:column;gap:23px}.care-steps li{display:grid;grid-template-columns:44px 1fr;gap:0 19px;padding-top:24px}.step-number{grid-row:1/3;font-size:35px;letter-spacing:-1.6px;margin:0}.care-steps h3{font-size:25px;letter-spacing:-.9px;margin-bottom:10px}.care-steps p{font-size:14px;line-height:1.7;max-width:none}.care-action{align-items:flex-start;flex-direction:column;gap:15px;margin-top:28px}.care-action>.button{width:100%;font-size:14px}.demo-hint{font-size:12px}
+ .contacts{width:calc(100% - 20px);padding-block:32px;border-radius:26px}.contacts>.wrap{padding-inline:22px}.contacts h2{font-size:39px;line-height:1.04;letter-spacing:-1.8px}.contact-phone{font-size:28px;letter-spacing:-.9px;margin-top:26px}.contact-links{gap:15px;margin-top:22px}.contact-links>a{font-size:12px;gap:8px}.address-card{padding:24px 22px;border-radius:22px}.address-card h3{font-size:25px;line-height:1.15;letter-spacing:-.8px}.address-card .address-note{font-size:13px;line-height:1.7}.visit-details{grid-template-columns:1fr;gap:16px}.visit-details span{font-size:12px}.visit-details strong{font-size:13px}.address-card .button{width:100%;gap:15px;font-size:13px}.clinic-map{border-radius:22px}.map-heading{padding:22px 20px}.map-heading h3{font-size:23px;letter-spacing:-.7px}.map-toolbar{padding:16px 20px}.map-toolbar p{font-size:11px;line-height:1.7}.map-toolbar .text-link{font-size:12px}
+ .footer{padding-block:28px}.footer-main{gap:20px}.footer-wordmark{font-size:48px;letter-spacing:-2.8px;line-height:1.1}.footer-main>div{font-size:12px;margin:0}.concept-label{margin:0;font-size:10px;max-width:none;padding:7px 11px}.footer-meta{gap:18px;padding-block:24px}.footer-meta>a,.footer-meta>button{font-size:12px}.medical-note{font-size:16px;text-align:left;letter-spacing:-.3px}
+ dialog{border-radius:25px}.dialog-content{padding-inline:22px}.booking-main h2{font-size:34px}.booking-main .field input,.booking-main .field select{font-size:16px}.booking-main .form-submit{font-size:14px}.booking-main .booking-context{font-size:14px}.booking-main .form-demo-note>p,.booking-main .form-demo-note .text-link{font-size:12px}.max-live-top strong{font-size:19px}.max-live{padding:20px}.price-row h3{font-size:19px}.price-amount{font-size:20px}.prices-heading h2{font-size:34px}.dialog-top>.eyebrow{font-size:11px}.news-dialog .news-card{padding:23px}
+}
+@media(max-width:359px){
+ .wrap{padding-inline:18px}.brand-name{font-size:22px}.brand-mark{width:27px;height:27px}.header-inner{min-height:68px;gap:8px}.reading-toggle{width:32px;height:32px}.menu-toggle{width:30px}
+ .announcement-content{min-height:84px}.announcement .booking-link{font-size:10px;padding-inline:9px!important}.announcement-controls{gap:3px}.announcement-controls .icon-button{width:26px;height:26px;min-width:26px}.announcement-controls>span{font-size:10px}
+ .hero.wrap{min-height:600px;padding:24px 21px}.hero h1{font-size:46px;line-height:1.02;letter-spacing:-2.7px}.hero-description{font-size:14px;line-height:1.65}.hero-actions .button,.hero-actions .button.secondary{font-size:13px;min-height:51px;padding-left:17px}.hero-callback{font-size:10px;max-width:260px}.quick-bar{padding-inline:20px}
+ h2{font-size:34px}.news-vision h3{font-size:29px}.news-card h3{font-size:25px}#news-grid>.news-card{padding:23px}#news-grid>.news-card:first-child{min-height:455px;padding:23px}.news-card .booking-link{font-size:12px;gap:14px}
+ .care-search{padding:20px 17px}.care-search-label{font-size:17px}.direction-card.vision-card{min-height:385px;padding:23px}.vision-card .card-bottom{left:23px;right:23px}.vision-card .card-title{font-size:32px}.vision-card .card-description{font-size:13px;max-width:210px}.card-title{font-size:21px}.card-description{font-size:12px}.direction-card:not(.vision-card){gap:12px;grid-template-columns:38px 1fr}.direction-card .card-top{width:38px;height:38px}
+ .doctors>.wrap{padding-inline:19px}.doctors-photo{min-height:400px}.doctors-photo-caption{inset:auto 20px 23px}.doctors-photo-caption>p{font-size:27px}.doctors-photo-caption .button{font-size:12px;gap:10px;padding-left:14px}.doctor-card h3{font-size:23px}.doctor-card{gap:0 11px}.doctor-specialty{font-size:11px}.contacts>.wrap{padding-inline:19px}.contacts h2{font-size:35px}.contact-phone{font-size:25px}.contact-links>a{font-size:11px}.address-card{padding:22px 19px}.address-card h3{font-size:23px}.footer-wordmark{font-size:42px}.dialog-content{padding-inline:18px}.booking-main h2{font-size:31px}
+}
+/* Accessibility mode intentionally favours reading space over campaign density. */
+body.reading-mode{--muted:#35443a;--line:#839489;--accent:#a5271b;--paper:#fff;--wash:#edf3ee}
+body.reading-mode .hero-description{font-size:20px;line-height:1.65;color:var(--white)}
+body.reading-mode .hero-callback{font-size:14px;color:var(--white)}
+body.reading-mode .hero.wrap{min-height:610px}
+body.reading-mode .hero-actions{flex-wrap:wrap}
+body.reading-mode .hero-actions .button{font-size:16px}
+body.reading-mode .announcement-content p{font-size:17px}
+body.reading-mode .news-card>p,body.reading-mode .care-steps p,body.reading-mode .card-description{font-size:17px;line-height:1.75}
+body.reading-mode .doctor-card>p{font-size:15px;-webkit-line-clamp:3}
+body.reading-mode .doctor-credentials>span,body.reading-mode .doctor-rating,body.reading-mode .doctor-rating>.rating-source{font-size:14px}
+body.reading-mode .max-live-message dd{font-size:18px}
+body.reading-mode .section-index{font-size:15px}
+body.reading-mode .vision-card .card-description{font-size:17px;max-width:310px}
+@media(max-width:900px){body.reading-mode .doctors-editorial{grid-template-columns:1fr}body.reading-mode .doctors-photo{min-height:460px}body.reading-mode .doctors-photo>img{width:115%;left:-7.5%;height:100%}body.reading-mode .direction-grid{display:flex;flex-direction:column}body.reading-mode .vision-card{min-height:430px}body.reading-mode .direction-card:not(.vision-card){min-height:120px}body.reading-mode .doctor-card{padding-block:25px}}
+@media(max-width:600px){body.reading-mode .hero.wrap{min-height:720px}body.reading-mode .hero-description{font-size:18px}body.reading-mode .hero-callback{font-size:13px}body.reading-mode .announcement-content{min-height:108px}body.reading-mode .hero-actions .button{font-size:15px}body.reading-mode .vision-card .card-description{font-size:16px}body.reading-mode .news-vision>p{font-size:15px}body.reading-mode .card-title{font-size:25px}body.reading-mode .contact-phone{font-size:26px}body.reading-mode .news-vision{min-height:520px!important}}
+@media(prefers-reduced-motion:reduce){.hero-media,.hero-media img,.news-media,.vision-card .card-top>svg{animation:none!important;transform:none!important;transition:none!important}}
+@media(prefers-reduced-transparency:reduce){.header,.mobile-book{backdrop-filter:none;background:var(--paper)}.hero-actions .button.secondary{backdrop-filter:none;background:#1b2b21}dialog::backdrop{backdrop-filter:none;background:#0e171ad9}}
+@media print{.hero.wrap{color:var(--ink);background:var(--paper);min-height:0}.hero-media,.hero::after,.doctors-photo,.news-media{display:none}.hero h1,.hero h1>span,.hero-description{color:var(--ink)}.contacts{background:var(--paper);color:var(--ink)}.news-vision{background:var(--paper)!important;color:var(--ink)}.news-vision::after{display:none}.news-vision>p,.news-vision .news-topline .eyebrow{color:var(--ink)}}

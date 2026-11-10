@@ -43,6 +43,7 @@ motionPreference.addEventListener('change',event=>{if(event.matches)userPaused=t
 $('#announcement-book').addEventListener('click',()=>openBooking({name:content.announcements[announcementIndex].request,kind:'announcement'}));renderAnnouncement();scheduleAnnouncement();
 function createNewsCard(item){
  const card=document.createElement('article');card.className='news-card';
+ if(item.id==='vision'){card.classList.add('news-vision');const image=document.createElement('img');image.className='news-media';image.src='vision-v5.webp';image.width=1448;image.height=1086;image.alt='';image.loading='lazy';image.setAttribute('aria-hidden','true');card.append(image);}
  const top=document.createElement('div');top.className='news-topline';
  const kind=document.createElement('span');kind.className='eyebrow';kind.textContent=item.kind;
  top.append(kind,icon(item.id==='vision'?'eye':item.id==='iv'?'heart':'calendar'));
@@ -241,3 +242,26 @@ function renderServicePrices(service){
  related.slice(0,3).forEach(item=>{const row=document.createElement('div');row.className='service-price';const name=document.createElement('span'),amount=document.createElement('strong');name.textContent=item.name;amount.textContent=priceAmount(item);row.append(name,amount);box.append(row);});
  const note=document.createElement('p');note.className='service-price-note';note.textContent=related[0].amount===null?related[0].note:'Прайс от 01.10.2026. Условия и все варианты — в полном документе.';box.append(note);
 }
+
+// Campaign motion is local and bounded. Forms, search and notice controls stay still.
+const campaignHero=$('.hero'),finePointer=matchMedia('(hover: hover) and (pointer: fine)');
+let heroMotionFrame=0,heroTarget={x:0,y:0};
+function paintHeroMotion(){heroMotionFrame=0;campaignHero.style.setProperty('--hero-x',heroTarget.x+'px');campaignHero.style.setProperty('--hero-y',heroTarget.y+'px');}
+function resetHeroMotion(){heroTarget={x:0,y:0};if(!heroMotionFrame)heroMotionFrame=requestAnimationFrame(paintHeroMotion);}
+campaignHero.addEventListener('pointermove',event=>{
+ if(motionPreference.matches||!finePointer.matches)return;
+ const box=campaignHero.getBoundingClientRect();
+ heroTarget={x:((event.clientX-box.left)/box.width-.5)*9,y:((event.clientY-box.top)/box.height-.5)*7};
+ if(!heroMotionFrame)heroMotionFrame=requestAnimationFrame(paintHeroMotion);
+},{passive:true});
+campaignHero.addEventListener('pointerleave',resetHeroMotion);
+motionPreference.addEventListener('change',event=>{if(event.matches)resetHeroMotion();});
+if(!motionPreference.matches){
+ animateSoft($('#hero-title'),[{opacity:.3,transform:'translateY(18px)'},{opacity:1,transform:'translateY(0)'}],{duration:700});
+ animateSoft($('.hero-actions'),[{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:600,delay:110,fill:'backwards'});
+}
+$$('.doctor-card>.booking-link').forEach((button,index)=>{
+ const doctor=doctorById.get(featured[index].id);
+ button.setAttribute('aria-label','Записаться к врачу: '+doctor.name);
+ button.title='Записаться к врачу: '+doctor.name;
+});
