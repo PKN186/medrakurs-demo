@@ -1,209 +1,48 @@
-'use strict';
-
-// Only published service categories are used. No diagnoses, prices or availability
-// are inferred. Reception confirms the actual appointment by telephone.
-const directions = [
-  { id:'rehab', number:'01', name:'Реабилитация', audience:['adult','child'], description:'Восстановление движения и повседневной активности. План процедур обсуждается на консультации со специалистом.', summary:'Движение и восстановление', services:['Индивидуальная физическая культура','Механотерапия','Физиотерапия','Массаж'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'ortho', number:'02', name:'Ортопедия', audience:['adult','child'], description:'Консультация травматолога-ортопеда по вопросам суставов, позвоночника и стоп.', summary:'Суставы, позвоночник, стопы', services:['Приём травматолога-ортопеда','Лечение сколиоза','Индивидуальные ортопедические стельки','Ортезирование'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'neuro', number:'03', name:'Неврология', audience:['adult'], description:'Консультация невролога: жалобы, результаты обследований и следующие шаги.', summary:'Забота о нервной системе', services:['Приём невролога','Обсуждение результатов обследований','Выбор дальнейшего обследования и лечения'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'children', number:'04', name:'Детям', audience:['child'], description:'Педиатрия и помощь детям с нарушениями движения и развития. Возраст приёма и нужного специалиста уточнит администратор.', summary:'Педиатрия и развитие', services:['Приём педиатра','Детская хирургия','Помощь при нарушениях речевого развития','Реабилитация детей'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'therapy', number:'05', name:'Терапия', audience:['adult'], description:'Консультация терапевта по вопросам общего самочувствия и дальнейшего обследования.', summary:'Общее самочувствие и консультации', services:['Приём терапевта','Обсуждение жалоб и медицинских документов','Рекомендации по дальнейшему обследованию'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'surgery', number:'06', name:'Хирургия', audience:['adult','child'], description:'Консультации хирурга и детского хирурга. Специализацию и возраст приёма уточняйте при записи.', summary:'Консультации взрослых и детей', services:['Приём хирурга','Детская хирургия','Консультация хирурга-эндокринолога'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'podology', number:'07', name:'Подология', audience:['adult','child'], description:'Консультация по вопросам состояния стоп и ногтей. Нужный объём помощи определяет специалист.', summary:'Стопы, ногти, плоскостопие', services:['Лечение проблем стоп','Помощь при вросших ногтях','Лечение плоскостопия','Помощь при проблемах стоп у детей'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'gastro', number:'08', name:'Гастроэнтерология', audience:['adult'], description:'Приём гастроэнтеролога по вопросам органов пищеварения.', summary:'Забота о пищеварении', services:['Консультация гастроэнтеролога','Обсуждение жалоб и результатов обследований'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'ent', number:'09', name:'ЛОР и сурдология', audience:['adult'], description:'Консультация ЛОР-врача и сурдолога. Подготовку и доступное время приёма уточнит администратор.', summary:'Ухо, горло, нос и слух', services:['Приём ЛОР-сурдолога','Консультация по вопросам слуха'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'derma', number:'10', name:'Дерматология', audience:['adult'], description:'Консультация по вопросам состояния кожи. Возраст приёма и расписание уточняйте у администратора.', summary:'Консультация по вопросам кожи', services:['Консультация дерматолога'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'manual', number:'11', name:'Мануальная терапия', audience:['adult'], description:'Мануальная терапия и остеопатия. Возможность проведения процедур обсуждается со специалистом на консультации.', summary:'Мануальная терапия и остеопатия', services:['Мануальная терапия','Остеопатия','Кинезиотейпирование'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'mental', number:'12', name:'Психическое здоровье', audience:['adult'], description:'Консультации психиатра и психотерапевта. Уточнить специалиста и порядок записи можно у администратора.', summary:'Психиатр и психотерапевт', services:['Приём психиатра','Приём психотерапевта'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'diet', number:'13', name:'Диетология', audience:['adult'], description:'Консультация диетолога по вопросам питания. Рекомендации обсуждаются индивидуально на приёме.', summary:'Питание и консультации', services:['Консультация диетолога'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'procedures', number:'14', name:'Лечебные процедуры', audience:['adult'], description:'Процедуры проводятся по назначению врача. Подготовку, стоимость и наличие услуги уточняйте при записи.', summary:'Процедурный кабинет и терапия', services:['Процедурный кабинет','Ударно-волновая терапия','Лечебные блокады','Внутрисуставное введение лекарственных средств'], source:'https://ra-kurs86.ru/uslugi' },
-  { id:'narcology', number:'15', name:'Наркология', audience:['adult'], description:'Приём нарколога. Порядок консультации и расписание можно уточнить у администратора.', summary:'Консультация специалиста', services:['Консультация нарколога'], source:'https://ra-kurs86.ru/uslugi' },
-];
-
-const $ = (selector, root = document) => root.querySelector(selector);
-const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-const booking = $('#booking-dialog');
-const catalog = $('#catalog-dialog');
-const detail = $('#direction-dialog');
-let activeDirection = null;
-let catalogFilter = 'all';
-let returnFocus = null;
-let detailFromCatalog = false;
-
-function openDialog(dialog, initiator = document.activeElement) {
-  // Never stack modal dialogs; preserve the original, visible focus target.
-  if (!$$('dialog[open]').length) returnFocus = initiator;
-  $$('dialog[open]').forEach(open => open.close());
-  dialog.showModal();
-  document.body.classList.add('modal-open');
-}
-
-function restoreFocus() {
-  document.body.classList.toggle('modal-open', !!$$('dialog[open]').length);
-  if (!$$('dialog[open]').length && returnFocus?.isConnected) returnFocus.focus({preventScroll:true});
-}
-
-$$('dialog').forEach(dialog => {
-  dialog.addEventListener('close', restoreFocus);
-  $('[data-close]', dialog).addEventListener('click', () => dialog.close());
-  dialog.addEventListener('click', event => {
-    if (event.target !== dialog) return;
-    const rect = dialog.getBoundingClientRect();
-    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
-  });
-});
-
-function openBooking(direction = null) {
-  closeMenu();
-  $('#copy-label').textContent = 'Скопировать номер';
-  $('#copy-status').textContent = '';
-  $('#copy-phone use').setAttribute('href','#copy');
-  $('#booking-context').textContent = direction
-    ? `Вы выбрали направление «${direction.name}». Администратор уточнит специалиста, стоимость и время приёма.`
-    : 'Администратор поможет выбрать специалиста и удобное время.';
-  openDialog(booking);
-}
-
-$$('[data-book]').forEach(button => button.addEventListener('click', () => openBooking()));
-
-function openDirection(id, fromCatalog = false) {
-  activeDirection = directions.find(item => item.id === id);
-  if (!activeDirection) return;
-  detailFromCatalog = fromCatalog;
-  $('#direction-index').textContent = `${activeDirection.number} / МЕДРАКУРС`;
-  $('#direction-title').textContent = activeDirection.name;
-  $('#direction-description').textContent = activeDirection.description;
-  $('#direction-services').replaceChildren(...activeDirection.services.map(service => {
-    const li = document.createElement('li');
-    li.textContent = service;
-    return li;
-  }));
-  $('#direction-source').href = activeDirection.source;
-  openDialog(detail);
-}
-
-$$('[data-direction]').forEach(button => button.addEventListener('click', () => openDirection(button.dataset.direction)));
-$('#direction-book').addEventListener('click', () => openBooking(activeDirection));
-
-// Escape from a catalog result returns to the current search rather than losing it.
-detail.addEventListener('cancel', event => {
-  if (!detailFromCatalog) return;
-  event.preventDefault();
-  openDialog(catalog);
-  $('#catalog-search').focus();
-});
-
-function normalize(text) {
-  return text.toLocaleLowerCase('ru').replace(/ё/g, 'е').trim();
-}
-
-function renderCatalog() {
-  const query = normalize($('#catalog-search').value);
-  const words = query.split(/\s+/).filter(Boolean);
-  const matches = directions.filter(item => {
-    const text = normalize([item.name, item.summary, ...item.services].join(' '));
-    return (catalogFilter === 'all' || item.audience.includes(catalogFilter)) && words.every(word => text.includes(word));
-  });
-  $('#catalog-status').textContent = `Найдено направлений: ${matches.length}`;
-  const results = $('#catalog-results');
-  results.replaceChildren();
-  if (!matches.length) {
-    const empty = document.createElement('p');
-    empty.className = 'catalog-empty';
-    empty.textContent = 'По этому запросу ничего не найдено. Попробуйте другое название или обратитесь к администратору.';
-    results.append(empty);
-    return;
-  }
-  matches.forEach(item => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'catalog-result';
-    const copy = document.createElement('span');
-    const name = document.createElement('span');
-    name.className = 'result-name';
-    name.textContent = item.name;
-    const description = document.createElement('span');
-    description.className = 'result-description';
-    description.textContent = item.summary;
-    copy.append(name, description);
-    const arrow = document.createElementNS('http://www.w3.org/2000/svg','svg');
-    arrow.setAttribute('aria-hidden','true');
-    const use = document.createElementNS('http://www.w3.org/2000/svg','use');
-    use.setAttribute('href','#arrow-up');
-    arrow.append(use);
-    button.append(copy,arrow);
-    button.addEventListener('click', () => openDirection(item.id, true));
-    results.append(button);
-  });
-}
-
-$$('[data-catalog]').forEach(button => button.addEventListener('click', () => {
-  renderCatalog();
-  openDialog(catalog);
-  $('#catalog-search').focus();
-}));
-$('#catalog-search').addEventListener('input', renderCatalog);
-$$('[data-filter]').forEach(button => button.addEventListener('click', () => {
-  catalogFilter = button.dataset.filter;
-  $$('[data-filter]').forEach(filter => filter.setAttribute('aria-pressed', String(filter === button)));
-  renderCatalog();
-}));
-
-$('#copy-phone').addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText('+79821820182');
-    $('#copy-label').textContent = 'Скопировано';
-    $('#copy-status').textContent = 'Номер скопирован: +7 982 182-01-82';
-    $('#copy-phone use').setAttribute('href','#check');
-  } catch {
-    $('#copy-status').textContent = 'Не удалось скопировать автоматически. Номер для записи: +7 982 182-01-82';
-  }
-});
-
-const menuToggle = $('.menu-toggle');
-const mobileMenu = $('#mobile-menu');
-function closeMenu() {
-  mobileMenu.hidden = true;
-  menuToggle.setAttribute('aria-expanded','false');
-  menuToggle.setAttribute('aria-label','Открыть меню');
-}
-menuToggle.addEventListener('click', () => {
-  const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
-  mobileMenu.hidden = isOpen;
-  menuToggle.setAttribute('aria-expanded', String(!isOpen));
-  menuToggle.setAttribute('aria-label', isOpen ? 'Открыть меню' : 'Закрыть меню');
-});
-$$('a', mobileMenu).forEach(link => link.addEventListener('click', closeMenu));
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && !mobileMenu.hidden) {
-    closeMenu();
-    menuToggle.focus();
-  }
-});
-matchMedia('(min-width:851px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
-
-const readingToggle = $('.reading-toggle');
-let readingMode = false;
-try { readingMode = localStorage.getItem('medrakurs-reading-mode') === 'true'; } catch { /* File previews may restrict storage. */ }
-function applyReadingMode() {
-  document.body.classList.toggle('reading-mode', readingMode);
-  readingToggle.setAttribute('aria-pressed', String(readingMode));
-  readingToggle.setAttribute('aria-label', readingMode ? 'Вернуть обычный размер текста' : 'Увеличить текст и контраст');
-}
-readingToggle.addEventListener('click', () => {
-  readingMode = !readingMode;
-  applyReadingMode();
-  try { localStorage.setItem('medrakurs-reading-mode', String(readingMode)); } catch { /* No persistence needed to use the toggle. */ }
-});
-applyReadingMode();
-
-// Keep the opening screen quiet; the mobile action follows only after its
-// original button has scrolled above the viewport.
-if ('IntersectionObserver' in window) {
-  const actionObserver = new IntersectionObserver(([entry]) => {
-    document.body.classList.toggle('mobile-cta-visible', !entry.isIntersecting && entry.boundingClientRect.top < 0);
-  });
-  actionObserver.observe($('.hero-actions'));
-} else {
-  document.body.classList.add('mobile-cta-visible');
-}
+"use strict";
+const content=window.MEDRAKURS_CONTENT;
+const $=(selector,root=document)=>root.querySelector(selector);
+const $$=(selector,root=document)=>[...root.querySelectorAll(selector)];
+const groupById=new Map(content.groups.map(group=>[group.id,group]));
+const serviceById=new Map(content.services.map(service=>[service.id,service]));
+const doctorById=new Map(content.doctors.map(doctor=>[doctor.id,doctor]));
+const booking=$('#booking-dialog'),catalog=$('#catalog-dialog'),serviceDialog=$('#service-dialog');
+const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
+let catalogFilter='all',activeService=null,returnFocus=null,announcementIndex=0;
+function icon(id){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('aria-hidden','true');const use=document.createElementNS('http://www.w3.org/2000/svg','use');use.setAttribute('href',`#${id}`);svg.append(use);return svg;}
+function animateSoft(element,frames,options={}){if(!element?.animate)return;if(motionPreference.matches)return element.animate([{opacity:.8},{opacity:1}],{duration:120});return element.animate(frames,{duration:420,easing:'cubic-bezier(.22,1,.36,1)',...options});}
+function openDialog(dialog,initiator=document.activeElement){if(!$$('dialog[open]').length)returnFocus=initiator;$$('dialog[open]').forEach(open=>open.close());dialog.showModal();dialog.scrollTop=0;document.body.classList.add('modal-open');}
+$$('dialog').forEach(dialog=>{dialog.addEventListener('close',()=>{document.body.classList.toggle('modal-open',!!$$('dialog[open]').length);if(!$$('dialog[open]').length&&returnFocus?.isConnected)returnFocus.focus({preventScroll:true});});$('[data-close]',dialog).addEventListener('click',()=>dialog.close());dialog.addEventListener('click',event=>{if(event.target!==dialog)return;const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();});});
+$$('[data-service-count]').forEach(node=>node.textContent=content.services.length);$$('[data-doctor-count]').forEach(node=>node.textContent=content.doctors.length);
+// Notices change only on request; they never move away while being read.
+function renderAnnouncement(animate=false,direction=1){const item=content.announcements[announcementIndex];$('.announcement-tag').textContent=item.label;$('#announcement-title').textContent=item.title;$('#announcement-count').textContent=`${announcementIndex+1} / ${content.announcements.length}`;$('#announcement-count').setAttribute('aria-label',`Анонс ${announcementIndex+1} из ${content.announcements.length}`);if(animate)animateSoft($('#announcement-content'),[{opacity:0,transform:`translateX(${direction*10}px)`},{opacity:1,transform:'translateX(0)'}],{duration:300});}
+$('#announcement-prev').addEventListener('click',()=>{announcementIndex=(announcementIndex-1+content.announcements.length)%content.announcements.length;renderAnnouncement(true,-1);});$('#announcement-next').addEventListener('click',()=>{announcementIndex=(announcementIndex+1)%content.announcements.length;renderAnnouncement(true,1);});$('#announcement-book').addEventListener('click',()=>openBooking({name:content.announcements[announcementIndex].request,kind:'announcement'}));renderAnnouncement();
+content.announcements.forEach(item=>{const card=document.createElement('article');card.className='news-card';card.dataset.reveal='';const top=document.createElement('div');top.className='news-topline';const kind=document.createElement('span');kind.className='eyebrow';kind.textContent=item.kind;top.append(kind);if(item.demo){const badge=document.createElement('span');badge.className='news-badge';badge.textContent='Пример анонса';top.append(badge);}else top.append(icon(item.id==='iv'?'heart':'calendar'));const title=document.createElement('h3');title.textContent=item.title;const text=document.createElement('p');text.textContent=item.text;const button=document.createElement('button');button.type='button';button.className='text-link';button.append(document.createTextNode(item.action),icon('arrow-up'));button.addEventListener('click',()=>openBooking({name:item.request,kind:'announcement'}));card.append(top,title,text);if(item.demo){const note=document.createElement('p');note.className='news-note';note.textContent='Дата и специальность будут указаны после согласования с центром.';card.append(note);}card.append(button);if(item.source){const source=document.createElement('a');source.className='news-source';source.href=item.source;source.target='_blank';source.rel='noopener';source.textContent='Сообщение на сайте центра ↗';card.append(source);}$('#news-grid').append(card);});
+// All 77 original service URLs are retained, including merged semantic duplicates.
+content.groups.forEach(group=>$('#catalog-category').append(new Option(group.name,group.id)));
+function normalize(text){return text.toLocaleLowerCase('ru').replace(/ё/g,'е').trim();}
+function renderCatalog(){const words=normalize($('#catalog-search').value).split(/\s+/).filter(Boolean),group=$('#catalog-category').value;const matches=content.services.filter(item=>{const haystack=normalize([item.name,...item.aliases,groupById.get(item.group).name,...item.sources.map(source=>source.title)].join(' '));return(group==='all'||group===item.group)&&(catalogFilter==='all'||item.tags.includes(catalogFilter))&&words.every(word=>haystack.includes(word));});$('#catalog-status').textContent=`Найдено: ${matches.length} из ${content.services.length}`;const results=$('#catalog-results');results.replaceChildren();if(!matches.length){const empty=document.createElement('p');empty.className='catalog-empty';empty.textContent='По этому запросу ничего не найдено. Попробуйте другое название или выберите другой раздел.';results.append(empty);return;}matches.forEach(item=>{const button=document.createElement('button');button.type='button';button.className='catalog-result';const copy=document.createElement('span'),name=document.createElement('span'),description=document.createElement('span');name.className='result-name';name.textContent=item.name;description.className='result-description';description.textContent=groupById.get(item.group).name;copy.append(name,description);button.append(copy,icon('arrow-up'));button.addEventListener('click',()=>openService(item.id));results.append(button);});}
+function setCatalogFilter(filter){catalogFilter=filter;$$('[data-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===filter)));}
+function openCatalog(category='all'){$('#catalog-search').value='';$('#catalog-category').value=groupById.has(category)?category:'all';setCatalogFilter(['consult','child'].includes(category)?category:'all');renderCatalog();openDialog(catalog);$('#catalog-search').focus();}
+$$('[data-catalog]').forEach(button=>button.addEventListener('click',()=>openCatalog()));$$('[data-category]').forEach(button=>button.addEventListener('click',()=>openCatalog(button.dataset.category)));$('#catalog-search').addEventListener('input',renderCatalog);$('#catalog-category').addEventListener('change',renderCatalog);$$('[data-filter]').forEach(button=>button.addEventListener('click',()=>{setCatalogFilter(button.dataset.filter);renderCatalog();}));
+function openService(id){activeService=serviceById.get(id);if(!activeService)return;$('#service-title').textContent=activeService.name;$('#service-group').textContent=groupById.get(activeService.group).name;const sources=$('#service-sources');sources.replaceChildren();activeService.sources.forEach(source=>{const link=document.createElement('a');link.href=source.url;link.target='_blank';link.rel='noopener';link.textContent=activeService.sources.length===1?'Подробнее на действующем сайте ↗':source.title+' ↗';sources.append(link);});openDialog(serviceDialog);}
+function backToCatalog(){openDialog(catalog);$('#catalog-search').focus();}
+$('#service-back').addEventListener('click',backToCatalog);serviceDialog.addEventListener('cancel',event=>{event.preventDefault();backToCatalog();});$('#service-book').addEventListener('click',()=>openBooking({name:activeService.name,kind:'service'}));
+const featured=[{id:'doctor-03',short:'Илья Козловский',specialty:'Ортопедия и реабилитация',text:'Травматолог-ортопед, мануальный терапевт, остеопат, врач физической и реабилитационной медицины.'},{id:'doctor-07',short:'Эльвира Рубцова',specialty:'Детская дерматология',text:'Детский дерматолог, специалист по озонотерапии. Возраст приёма и расписание уточнит администратор.'},{id:'doctor-01',short:'Дмитрий Рассохин',specialty:'Остеопатия',text:'Врач-остеопат. Запись на консультацию и подготовку к визиту можно обсудить с администратором.'}];
+featured.forEach(item=>{const doctor=doctorById.get(item.id),card=document.createElement('article');card.className='doctor-card';card.dataset.reveal='';const identity=document.createElement('div');identity.className='doctor-identity';const initials=document.createElement('span');initials.className='doctor-initials';initials.setAttribute('aria-hidden','true');initials.textContent=item.short.split(' ').map(part=>part[0]).join('');const copy=document.createElement('div'),name=document.createElement('h3'),specialty=document.createElement('div');name.textContent=item.short;specialty.className='doctor-specialty';specialty.textContent=item.specialty;copy.append(name,specialty);identity.append(initials,copy);const text=document.createElement('p');text.textContent=item.text;const button=document.createElement('button');button.className='text-link';button.type='button';button.append(document.createTextNode('Оставить заявку врачу'),icon('arrow-up'));button.addEventListener('click',()=>openBooking({name:doctor.name,kind:'doctor'}));card.append(identity,text,button);$('#featured-doctors').append(card);});
+content.doctors.forEach(doctor=>{const row=document.createElement('div');row.className='doctor-list-row';const copy=document.createElement('div'),name=document.createElement('h3'),role=document.createElement('p');name.textContent=doctor.name;role.textContent=doctor.role;copy.append(name,role);const button=document.createElement('button');button.className='icon-button';button.type='button';button.setAttribute('aria-label',`Оставить заявку: ${doctor.name}`);button.append(icon('arrow-up'));button.addEventListener('click',()=>openBooking({name:doctor.name,kind:'doctor'}));row.append(copy,button);$('#all-doctors').append(row);});$$('[data-doctors]').forEach(button=>button.addEventListener('click',()=>openDialog($('#doctors-dialog'))));
+// Demo-only booking: no network, patient storage, date or time field.
+const specialistSelect=$('#booking-specialist');const helpGroup=document.createElement('optgroup');helpGroup.label='Помощь с выбором';helpGroup.append(new Option('Помогите выбрать специалиста','help'));specialistSelect.append(helpGroup);const groupsOptions=document.createElement('optgroup');groupsOptions.label='Направления помощи';content.groups.forEach(group=>groupsOptions.append(new Option(group.name,`group:${group.id}`)));specialistSelect.append(groupsOptions);const doctorsOptions=document.createElement('optgroup');doctorsOptions.label='Специалисты центра';content.doctors.forEach(doctor=>doctorsOptions.append(new Option(doctor.name,`doctor:${doctor.id}`)));specialistSelect.append(doctorsOptions);
+function clearErrors(){$$('.field input,.field select',booking).forEach(input=>input.removeAttribute('aria-invalid'));$$('.field-error',booking).forEach(node=>node.textContent='');}
+function openBooking(request=null){closeMenu();$('#booking-entry').hidden=false;$('#booking-success').hidden=true;clearErrors();$('#request-choice')?.remove();const note=$('#booking-request-note');note.hidden=!request;note.textContent=request?`Ваш выбор: ${request.name}`:'';if(request){const existing=content.doctors.find(doctor=>doctor.name===request.name);if(existing)specialistSelect.value=`doctor:${existing.id}`;else{const option=new Option(request.name,'request');option.id='request-choice';specialistSelect.append(option);specialistSelect.value='request';}}else specialistSelect.value='';booking.setAttribute('aria-labelledby','booking-title');openDialog(booking);}
+$$('[data-book]').forEach(button=>button.addEventListener('click',()=>openBooking()));
+function phoneDigits(value){let digits=value.replace(/\D/g,'');if(digits.length===10&&digits[0]==='9')digits='7'+digits;if(digits.length===11&&digits[0]==='8')digits='7'+digits;return digits;}
+function phoneValid(value){return /^7\d{10}$/.test(phoneDigits(value))&&!/[^+\d\s()\-.]/.test(value);}
+function phoneFormat(value){const d=phoneDigits(value);return `+7 (${d.slice(1,4)}) ${d.slice(4,7)}-${d.slice(7,9)}-${d.slice(9,11)}`;}
+const fields=[{id:'booking-specialist',error:'specialist-error',message:'Выберите специалиста или пункт «Помогите выбрать».',valid:value=>Boolean(value)},{id:'booking-name',error:'name-error',message:'Укажите имя — от двух букв.',valid:value=>/^[\p{L}\s’'\-]{2,60}$/u.test(value.trim())&&value.trim().replace(/[^\p{L}]/gu,'').length>=2},{id:'booking-phone',error:'phone-error',message:'Укажите телефон: +7 и ещё 10 цифр.',valid:phoneValid}];
+fields.forEach(field=>{const input=$('#'+field.id),clear=()=>{input.removeAttribute('aria-invalid');$('#'+field.error).textContent='';};input.addEventListener('input',clear);input.addEventListener('change',clear);});$('#booking-phone').addEventListener('blur',event=>{if(phoneValid(event.target.value))event.target.value=phoneFormat(event.target.value);});
+$('#fill-example').addEventListener('click',()=>{$('#booking-name').value='Анна';$('#booking-phone').value='+7 (900) 123-45-67';if(!specialistSelect.value)specialistSelect.value='help';clearErrors();animateSoft($('#booking-form'),[{opacity:.6},{opacity:1}],{duration:200});});
+$('#booking-form').addEventListener('submit',event=>{event.preventDefault();clearErrors();let firstInvalid=null;fields.forEach(field=>{const input=$('#'+field.id);if(!field.valid(input.value)){input.setAttribute('aria-invalid','true');$('#'+field.error).textContent=field.message;firstInvalid??=input;}});if(firstInvalid){firstInvalid.focus();return;}const rows=[['Имя',$('#booking-name').value.trim()],['Телефон',phoneFormat($('#booking-phone').value)],['Специалист',specialistSelect.selectedOptions[0].textContent]];const preview=$('#max-request-preview');preview.replaceChildren();rows.forEach(([label,value])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;preview.append(dt,dd);});$('#booking-entry').hidden=true;$('#booking-success').hidden=false;booking.setAttribute('aria-labelledby','booking-success-title');booking.scrollTop=0;$('#booking-success-title').focus({preventScroll:true});animateSoft($('.success-icon'),[{opacity:0,transform:'scale(.8)'},{opacity:1,transform:'scale(1)'}],{duration:400});});
+$('#booking-again').addEventListener('click',()=>{$('#booking-entry').hidden=false;$('#booking-success').hidden=true;booking.setAttribute('aria-labelledby','booking-title');booking.scrollTop=0;specialistSelect.focus({preventScroll:true});});booking.addEventListener('close',()=>{if(!booking.open){$('#booking-form').reset();clearErrors();$('#max-request-preview').replaceChildren();}});
+const menuToggle=$('.menu-toggle'),mobileMenu=$('#mobile-menu');function closeMenu(){mobileMenu.hidden=true;menuToggle.setAttribute('aria-expanded','false');menuToggle.setAttribute('aria-label','Открыть меню');}menuToggle.addEventListener('click',()=>{const isOpen=menuToggle.getAttribute('aria-expanded')==='true';mobileMenu.hidden=isOpen;menuToggle.setAttribute('aria-expanded',String(!isOpen));menuToggle.setAttribute('aria-label',isOpen?'Открыть меню':'Закрыть меню');});$$('a',mobileMenu).forEach(link=>link.addEventListener('click',closeMenu));document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!mobileMenu.hidden){closeMenu();menuToggle.focus();}});matchMedia('(min-width:901px)').addEventListener('change',event=>{if(event.matches)closeMenu();});
+const readingToggle=$('.reading-toggle');let readingMode=false;try{readingMode=localStorage.getItem('medrakurs-reading-mode')==='true';}catch{}function applyReadingMode(){document.body.classList.toggle('reading-mode',readingMode);readingToggle.setAttribute('aria-pressed',String(readingMode));readingToggle.setAttribute('aria-label',readingMode?'Вернуть обычный размер текста':'Увеличить текст и контраст');}readingToggle.addEventListener('click',()=>{readingMode=!readingMode;applyReadingMode();try{localStorage.setItem('medrakurs-reading-mode',String(readingMode));}catch{}});applyReadingMode();
+if('IntersectionObserver' in window){const actionsObserver=new IntersectionObserver(([entry])=>document.body.classList.toggle('mobile-cta-visible',!entry.isIntersecting&&entry.boundingClientRect.top<0));actionsObserver.observe($('.hero-actions'));const revealNodes=$$('[data-reveal]'),revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target);}}),{threshold:.08,rootMargin:'0px 0px 24px 0px'});if(!motionPreference.matches){document.body.classList.add('reveal-ready');revealNodes.forEach((node,index)=>{node.style.transitionDelay=`${Math.min(index%3,2)*55}ms`;revealObserver.observe(node);});}motionPreference.addEventListener('change',event=>{if(event.matches){document.body.classList.remove('reveal-ready');revealObserver.disconnect();}});}else document.body.classList.add('mobile-cta-visible');
