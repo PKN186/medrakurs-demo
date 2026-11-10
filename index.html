@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f6f5f1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Концепция нового сайта «Медракурс»: медицинский центр комплексной реабилитации в Ханты-Мансийске. Направления помощи, специалисты и контакты.">
+  <title>Медракурс — ближе к здоровой жизни</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="Onest.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="GolosText.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="arrow-up" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></symbol>
+    <symbol id="phone" viewBox="0 0 24 24"><path d="m8 3 3 5-3 3c1 2 3 4 5 5l3-3 5 3c0 3-2 5-5 5C10 21 3 14 3 8c0-3 2-5 5-5Z"/></symbol>
+    <symbol id="pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  </svg>
+  <a class="skip-link" href="#main">К содержанию</a>
+
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#" aria-label="Медракурс — главная">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="brand-name">медракурс<span>медицинский центр</span></span>
+      </a>
+      <nav class="desktop-nav" aria-label="Основная навигация">
+        <a href="#directions">Направления</a>
+        <a href="#approach">О центре</a>
+        <a href="https://ra-kurs86.ru/spetsialisty" target="_blank" rel="noopener">Врачи <span class="sr-only">на действующем сайте, в новой вкладке</span></a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button reading-toggle" type="button" aria-label="Увеличить текст и контраст" aria-pressed="false"><svg><use href="#eye"/></svg></button>
+        <a class="header-phone" href="tel:+79821820182">+7 982 182-01-82<span>Запись на приём</span></a>
+        <button class="menu-toggle icon-button" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+      </div>
+    </div>
+    <nav id="mobile-menu" class="mobile-menu" aria-label="Мобильная навигация" hidden>
+      <a href="#directions">Направления <span aria-hidden="true">01</span></a>
+      <a href="#approach">О центре <span aria-hidden="true">02</span></a>
+      <a href="https://ra-kurs86.ru/spetsialisty" target="_blank" rel="noopener">Врачи <svg class="icon"><use href="#arrow-up"/></svg></a>
+      <a href="#contacts">Контакты <span aria-hidden="true">03</span></a>
+      <button class="button primary" type="button" data-book>Записаться на приём <svg><use href="#arrow"/></svg></button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow location"><span class="status-dot"></span>Ханты-Мансийск <span class="eyebrow-separator">/</span> Взрослым и детям</p>
+        <h1 id="hero-title">Ближе<br>к здоровой<br><span>жизни.</span></h1>
+        <p class="hero-description">Консультации врачей и комплексная<br class="desktop-break"> реабилитация. С вниманием к вам<br class="desktop-break"> на каждом шаге.</p>
+        <div class="hero-actions">
+          <button class="button primary" type="button" data-book>Записаться на приём <svg><use href="#arrow-up"/></svg></button>
+          <a class="text-link" href="#directions">Найти направление <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="portrait-frame">
+          <img class="portrait" src="doctor.jpg" width="942" height="1000" alt="Портрет врача в белом халате" fetchpriority="high">
+          <div class="portrait-topline"><span>Медицина с вниманием к человеку</span><span class="tiny-cross" aria-hidden="true">+</span></div>
+          <div class="portrait-caption"><span>Сначала — человек.<br>Потом — план лечения.</span><a class="portrait-arrow" href="https://ra-kurs86.ru/spetsialisty" target="_blank" rel="noopener" aria-label="Познакомиться с врачами на действующем сайте"><svg><use href="#arrow-up"/></svg></a></div>
+        </div>
+        <div class="visual-footnote"><span>Медицинский центр комплексной реабилитации</span><span>01 — 03</span></div>
+      </div>
+    </section>
+
+    <div class="quick-bar wrap">
+      <p><svg class="icon"><use href="#pin"/></svg><span>Ханты-Мансийск<br><strong>ул. Патриса Лумумбы, 82</strong></span></p>
+      <p><span class="quick-plus" aria-hidden="true">+</span><span>Помощь рядом<br><strong>Врачи разных специальностей</strong></span></p>
+      <a href="https://ra-kurs86.ru/stoimost-uslug" target="_blank" rel="noopener"><span>Стоимость приёма и процедур</span><svg class="icon"><use href="#arrow-up"/></svg></a>
+    </div>
+
+    <section id="directions" class="directions wrap section" aria-labelledby="directions-title">
+      <div class="section-heading">
+        <div><p class="eyebrow section-index">01 / Направления помощи</p><h2 id="directions-title">С чего начнём?</h2></div>
+        <p class="section-description">Выберите направление.<br>Подробности — по нажатию.</p>
+      </div>
+      <div class="direction-grid">
+        <button class="direction-card" type="button" data-direction="rehab"><span class="card-top"><span class="card-index">01</span><svg class="direction-art" viewBox="0 0 64 64" aria-hidden="true"><path d="M13 49c0-17 38-17 38-34M13 15c0 17 38 17 38 34M13 32h38"/><circle cx="13" cy="15" r="3"/><circle cx="51" cy="49" r="3"/></svg></span><span class="card-bottom"><span class="card-title">Реабилитация</span><span class="card-description">Движение и восстановление</span></span><span class="card-arrow" aria-hidden="true"><svg><use href="#arrow-up"/></svg></span></button>
+        <button class="direction-card" type="button" data-direction="ortho"><span class="card-top"><span class="card-index">02</span><svg class="direction-art" viewBox="0 0 64 64" aria-hidden="true"><path d="m24 10 2 17-8 22M40 10l-2 17 8 22M19 52h-7m33 0h7M26 27l6 7 6-7"/><circle cx="32" cy="34" r="7"/></svg></span><span class="card-bottom"><span class="card-title">Ортопедия</span><span class="card-description">Суставы, позвоночник, стопы</span></span><span class="card-arrow" aria-hidden="true"><svg><use href="#arrow-up"/></svg></span></button>
+        <button class="direction-card" type="button" data-direction="neuro"><span class="card-top"><span class="card-index">03</span><svg class="direction-art" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 51V13m0 19-13-8m13 16 13-8M19 24v-9m0 9-9 7m35 1v-9m0 9 9 7"/><circle cx="32" cy="10" r="3"/><circle cx="19" cy="12" r="3"/><circle cx="8" cy="33" r="3"/><circle cx="45" cy="20" r="3"/><circle cx="56" cy="41" r="3"/><circle cx="32" cy="54" r="3"/></svg></span><span class="card-bottom"><span class="card-title">Неврология</span><span class="card-description">Забота о нервной системе</span></span><span class="card-arrow" aria-hidden="true"><svg><use href="#arrow-up"/></svg></span></button>
+        <button class="direction-card" type="button" data-direction="children"><span class="card-top"><span class="card-index">04</span><svg class="direction-art" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="21"/><path d="M25 38c4 5 10 5 14 0M24 27h1m14 0h1M25 12c0 10 11 8 9 0"/></svg></span><span class="card-bottom"><span class="card-title">Детям</span><span class="card-description">Педиатрия и развитие</span></span><span class="card-arrow" aria-hidden="true"><svg><use href="#arrow-up"/></svg></span></button>
+      </div>
+      <div class="directions-footer"><p>Нужен другой специалист?</p><button class="text-link" type="button" data-catalog>Все направления <svg class="icon"><use href="#arrow"/></svg></button></div>
+    </section>
+
+    <section id="approach" class="approach section" aria-labelledby="approach-title">
+      <div class="wrap approach-inner">
+        <div class="approach-intro"><p class="eyebrow section-index">02 / Наш подход</p><h2 id="approach-title">У каждого —<br>свой путь.<br><span>Пройдём его<br>вместе.</span></h2><p>В центре «Здравсервис Ко» можно обратиться за консультацией, пройти назначенные процедуры и реабилитацию.</p><a class="text-link" href="https://ra-kurs86.ru/spetsialisty" target="_blank" rel="noopener">Познакомиться с врачами <svg class="icon"><use href="#arrow-up"/></svg></a></div>
+        <ol class="care-steps">
+          <li><span class="step-number">01</span><div><h3>Начнём с разговора</h3><p>Расскажите врачу, что беспокоит. Возьмите с собой результаты обследований, если они есть.</p></div></li>
+          <li><span class="step-number">02</span><div><h3>Определим следующий шаг</h3><p>На консультации врач оценит состояние и обсудит с вами обследование или лечение.</p></div></li>
+          <li><span class="step-number">03</span><div><h3>Будем на связи</h3><p>Администратор поможет уточнить расписание, стоимость и подготовку к следующему визиту.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="contacts" class="contacts wrap section" aria-labelledby="contacts-title">
+      <div class="section-heading"><div><p class="eyebrow section-index">03 / Контакты</p><h2 id="contacts-title">Первый шаг —<br>просто связаться.</h2></div><p class="section-description">Поможем выбрать специалиста<br>и уточним время приёма.</p></div>
+      <div class="contact-grid">
+        <div class="contact-primary"><p class="eyebrow">Запись на приём</p><a class="contact-phone" href="tel:+79821820182">+7 982 182-01-82</a><div class="contact-links"><a href="https://t.me/rakurs38" target="_blank" rel="noopener">Telegram <svg class="icon"><use href="#arrow-up"/></svg></a><a href="https://vk.com/rakurs_86" target="_blank" rel="noopener">ВКонтакте <svg class="icon"><use href="#arrow-up"/></svg></a><a href="mailto:info@ra-kurs86.ru">Электронная почта <svg class="icon"><use href="#arrow-up"/></svg></a></div></div>
+        <div class="address-card"><svg class="address-pin icon"><use href="#pin"/></svg><p>Ханты-Мансийск</p><h3>Патриса Лумумбы, 82</h3><p class="address-note">Время работы уточняйте у администратора.</p><a class="text-link" href="https://yandex.ru/maps/?text=Ханты-Мансийск%2C%20Патриса%20Лумумбы%2C%2082" target="_blank" rel="noopener">Открыть на карте <svg class="icon"><use href="#arrow-up"/></svg></a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <div class="footer-main"><a class="footer-wordmark" href="#">медракурс<span>+</span></a><div><p>ООО «Здравсервис Ко»</p><p>Медицинский центр комплексной реабилитации</p></div><span class="concept-label">Концепция сайта / 2026</span></div>
+    <div class="footer-meta"><a href="https://ra-kurs86.ru/kontakty" target="_blank" rel="noopener">Сведения об организации и лицензии <svg class="icon"><use href="#arrow-up"/></svg></a><a href="https://ra-kurs86.ru/templates/rsmetro/docs/politika-obrabotki-PDn-v-OOO-Zdravservis-Ko.pdf" target="_blank" rel="noopener">Политика обработки персональных данных <span class="sr-only">PDF, в новой вкладке</span></a><a href="https://ra-kurs86.ru" target="_blank" rel="noopener">Действующий сайт <svg class="icon"><use href="#arrow-up"/></svg></a></div>
+    <p class="medical-note">Имеются противопоказания. Необходима консультация специалиста.</p>
+  </footer>
+
+  <div class="mobile-book"><a href="tel:+79821820182" class="mobile-call" aria-label="Позвонить в регистратуру"><svg class="icon"><use href="#phone"/></svg></a><button class="button primary" type="button" data-book>Записаться на приём <svg><use href="#arrow-up"/></svg></button></div>
+
+  <dialog id="booking-dialog" class="booking-dialog" aria-labelledby="booking-title">
+    <div class="dialog-content"><div class="dialog-top"><p class="eyebrow">Медракурс / Запись</p><button class="icon-button" type="button" data-close aria-label="Закрыть окно записи"><svg><use href="#close"/></svg></button></div><span class="booking-symbol" aria-hidden="true">+</span><h2 id="booking-title">Давайте начнём<br>с разговора.</h2><p id="booking-context" class="booking-context">Администратор поможет выбрать специалиста и удобное время.</p><a class="booking-number" href="tel:+79821820182">+7 982 182-01-82</a><a class="button primary" href="tel:+79821820182">Позвонить в центр <svg><use href="#phone"/></svg></a><div class="booking-other"><button class="text-link" id="copy-phone" type="button"><span id="copy-label">Скопировать номер</span> <svg class="icon"><use href="#copy"/></svg></button><a class="text-link" href="https://t.me/rakurs38" target="_blank" rel="noopener">Telegram <svg class="icon"><use href="#arrow-up"/></svg></a></div><p id="copy-status" class="copy-status" role="status" aria-live="polite"></p><p class="booking-footnote">Приём и его время подтверждает администратор.</p></div>
+  </dialog>
+
+  <dialog id="catalog-dialog" class="catalog-dialog" aria-labelledby="catalog-title">
+    <div class="dialog-content"><div class="dialog-top"><p class="eyebrow">Медракурс / Направления</p><button class="icon-button" type="button" data-close aria-label="Закрыть каталог"><svg><use href="#close"/></svg></button></div><h2 id="catalog-title">Найдём ваше<br>направление.</h2><label class="search-field"><svg class="icon"><use href="#search"/></svg><span class="sr-only">Поиск направления или услуги</span><input id="catalog-search" type="search" placeholder="Например, массаж или невролог" autocomplete="off"></label><div class="catalog-filters" role="group" aria-label="Фильтр направлений"><button type="button" data-filter="all" aria-pressed="true">Все</button><button type="button" data-filter="adult" aria-pressed="false">Взрослым</button><button type="button" data-filter="child" aria-pressed="false">Детям</button></div><p id="catalog-status" class="catalog-status" role="status" aria-live="polite"></p><div id="catalog-results" class="catalog-results"></div><div class="catalog-help"><p>Не знаете, к кому обратиться?</p><button class="text-link" type="button" data-book>Поможет администратор <svg class="icon"><use href="#arrow"/></svg></button></div></div>
+  </dialog>
+
+  <dialog id="direction-dialog" class="direction-dialog" aria-labelledby="direction-title">
+    <div class="dialog-content"><div class="dialog-top"><p class="eyebrow">Направление помощи</p><button class="icon-button" type="button" data-close aria-label="Закрыть описание направления"><svg><use href="#close"/></svg></button></div><p class="direction-dialog-index" id="direction-index" aria-hidden="true"></p><h2 id="direction-title"></h2><p id="direction-description" class="direction-description"></p><ul id="direction-services" class="direction-services"></ul><p class="direction-disclaimer">Нужные обследования и процедуры определяет врач на консультации.</p><button class="button primary" id="direction-book" type="button">Уточнить запись <svg><use href="#arrow-up"/></svg></button><a id="direction-source" class="text-link direction-source" target="_blank" rel="noopener">Подробнее на действующем сайте <svg class="icon"><use href="#arrow-up"/></svg></a></div>
+  </dialog>
+  <noscript><div class="no-script">Для записи позвоните <a href="tel:+79821820182">+7 982 182-01-82</a>. <a href="https://ra-kurs86.ru/uslugi">Направления на действующем сайте</a>.</div></noscript>
+</body>
+</html>
