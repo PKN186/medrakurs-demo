@@ -61,7 +61,7 @@ h2{font-size:clamp(36px,4.25vw,60px);line-height:1.03;letter-spacing:-.06em;font
 /* The hero is one photographic moment; the wording of the H1 is locked. */
 .hero.wrap{isolation:isolate;position:relative;display:flex;align-items:center;width:calc(100% - 36px);max-width:1404px;min-height:550px;margin:18px auto 0;padding:38px 46px;overflow:hidden;border-radius:var(--panel-radius);color:var(--white);background:#122019}
 .hero-media{position:absolute;inset:0;z-index:-2;overflow:hidden;transform:translate(var(--hero-x,0),var(--hero-y,0)) scale(1.03);transition:transform .8s var(--ease)}
-.hero-media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;animation:hero-photo-in 1.7s var(--ease) both}
+.hero-media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 25%;animation:hero-photo-in 1.7s var(--ease) both}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#07120be6 0%,#07120b9c 42%,#07120b19 70%,transparent 100%);pointer-events:none}
 .hero-copy{width:64%;max-width:800px;position:relative;z-index:1}
 .hero .location{color:#f0f3f0;font-size:12px;letter-spacing:.01em;gap:10px;line-height:1.5}
@@ -293,7 +293,7 @@ dialog h2{font-size:39px;letter-spacing:-1.7px;font-weight:530}
  #announcement-book{grid-area:action;justify-self:start}.announcement .booking-link{min-height:33px;font-size:11px;padding:6px 11px!important;gap:10px}
  .announcement-controls{grid-area:controls;gap:4px}.announcement-controls .icon-button{width:29px;height:29px;min-width:29px}.announcement-controls>span{font-size:11px}
  .hero.wrap{width:calc(100% - 20px);margin-top:10px;min-height:620px;display:flex;align-items:flex-end;padding:26px 24px;border-radius:26px}
- .hero-copy{width:100%;max-width:none}.hero-media img{object-position:70% center}.hero::after{background:linear-gradient(0deg,#07120bf7 0%,#07120be8 30%,#07120b7d 65%,#07120b10 100%)}
+ .hero-copy{width:100%;max-width:none}.hero-media{bottom:auto;height:340px}.hero-media img{object-position:82% center}.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#122019 0%,#12201900 58%);pointer-events:none}.hero::after{background:linear-gradient(0deg,#07120bf7 0%,#07120be8 30%,#07120b7d 65%,#07120b10 100%)}
  .hero .location{position:absolute;bottom:calc(100% + 86px);left:0;max-width:240px;font-size:11px;line-height:1.5;color:var(--white);display:none}
  .hero h1{font-size:clamp(47px,12.8vw,68px);line-height:1.01;letter-spacing:-.062em;max-width:360px;margin:0 0 20px;font-weight:550}
  .hero-description{font-size:15px;line-height:1.6;max-width:310px;color:#f4f6f3}

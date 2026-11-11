@@ -1,8 +1,8 @@
-# Иллюстрации для концепции v5
+# Иллюстрации для концепции сайта
 
 Использован встроенный инструмент image_gen.imagegen, не CLI и не сторонний платный API. transparent_background=false. Создано 10–11 ноября 2026 года. Изображения служат иллюстрациями веб-концепции и не изображают реальных пациентов, сотрудников, оборудование или помещения центра. Существующий doctor.webp с сайта клиники сохранён без изменений.
 
-Финальные файлы сайта:
+Ресурсы v5 (семейная сцена сохранена в архиве):
 
 - hero-health-v5.webp
 - vision-v5.webp
@@ -16,3 +16,14 @@ Use case: photorealistic-natural. Asset type: landscape campaign photograph for 
 ## Офтальмология — точный промпт
 
 Use case: photorealistic-natural. Asset type: premium editorial photograph for an ophthalmology feature on a multidisciplinary medical-center website concept. ONE landscape 4:3 photograph: an extreme close-up of a human adult woman's brown-green eye, eyebrow and a small part of the bridge of the nose. Real natural skin pores, fine eyelashes, a very subtle soft reflection of a window in the cornea, accurate natural anatomy, gentle closed-lip face not visible in frame. The eye is positioned in the upper RIGHT half, looking calmly ahead. The lower LEFT third is dark soft photographic shadow with negative space for white text to be added later in code. Palette: charcoal photographic shadows, natural warm skin, olive-brown iris. Strong contemporary magazine art direction, intimate, detailed, high-contrast but human and reassuring. No equipment, no lasers, no medical treatment, no diagnoses, no labels, no text, no logos, no watermark, no split before-and-after.
+
+
+## v7 — консультация в медицинском кабинете
+
+Создано 11 ноября 2026 года встроенным image_gen.imagegen, transparent_background=false. Актуальный ресурс первого экрана: hero-medical-v7.webp, 1672×941, 66 308 байт. Исходник: output/medrakurs-design-assets/hero-medical-v7.png. WebP — только экспорт исходника в веб-формат, без изменения сцены. Оригинал встроенного инструмента: $CODEX_HOME/generated_images/01a1c542-c480-7ef1-8591-0b76959e9889/exec-aabc515e-a958-45b9-8687-a8322aa43fb3.png.
+
+Врач, пациент и кабинет вымышлены. Изображение не подтверждает состав персонала, оборудование или интерьер настоящего центра. Никаких медицинских результатов или обещаний изображению не приписано. Настоящее фото центра и оба его видео сохранены в других блоках.
+
+Точный промпт:
+
+Use case: photorealistic-natural. Asset type: one wide 16:9 photographic hero image for an existing contemporary Russian multidisciplinary medical-center website concept. Primary request: visitors must immediately recognize a professional medical consultation, with a warm human relationship and a clear clinical setting. Scene: a bright, believable outpatient examination room with matte off-white walls, a softly blurred examination couch and a small wall-mounted diagnostic panel; daylight through frosted glass, restrained pale sage and warm neutral tones. Subjects: a fictional female physician approximately 45 years old in a crisp white medical coat over muted coral medical scrubs, a simple stethoscope around her neck, and one adult male patient approximately 40 in ordinary dark neutral clothing. Both seated, in a candid attentive consultation, turned slightly toward one another, physician listening and explaining calmly, the patient engaged. Natural facial texture and age, real fabric texture, ordinary unposed people, hands resting naturally on a desk, no theatrical gestures, neither looking at camera. Composition: subjects concentrated in the RIGHT 45 percent of the landscape frame, physician face near 72 percent horizontal and upper third vertically, patient partly visible at far right; both heads fully inside frame with breathing room. LEFT 48 percent: calm, softly defocused darker foreground frosted glass / clinic interior with generous clean negative space for large white website headline later added in code. Keep the medical coat and the recognizable clinic interior clearly visible on the right even when cropped to a vertical mobile viewport. Style: premium contemporary editorial healthcare photography, clear modern architectural light, eye-level 50mm photographic realism, confident and reassuring, full natural color, subtle grain. This is a conceptual illustration, not a photograph of the actual clinic or real staff. No text, lettering, logos, watermarks, UI, testimonials, badges, medical outcome claims. No outdoor scene, no family walking, no luxury spa, no sci-fi equipment, no exaggerated smiles, no plastic faces, no blue hospital-stock color cast. Output only one photograph, no collage or layout.
