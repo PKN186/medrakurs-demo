@@ -22,7 +22,7 @@ const progressBar=document.createElement('span');progressBar.className='announce
 function renderAnnouncement(animate=false,direction=1){const item=content.announcements[announcementIndex];$('.announcement-tag').textContent=item.label;$('#announcement-title').textContent=item.title;$('#announcement-count').textContent=`${announcementIndex+1} / ${content.announcements.length}`;$('#announcement-count').setAttribute('aria-label',`Анонс ${announcementIndex+1} из ${content.announcements.length}`);if(animate)animateSoft($('#announcement-content'),[{opacity:0,transform:`translateX(${direction*10}px)`},{opacity:1,transform:'translateX(0)'}],{duration:300});}
 function scheduleAnnouncement(){
  clearTimeout(announcementTimer);
- const paused=userPaused||hoverPaused||focusPaused||document.hidden||document.body.classList.contains('modal-open');
+ const paused=userPaused||hoverPaused||focusPaused||document.hidden||document.body.classList.contains('modal-open')||document.body.classList.contains('video-playing');
  announcementRegion.dataset.autoplay=paused?'paused':'running';
  $('#announcement-content').setAttribute('aria-live',paused?'polite':'off');
  autoplayButton.setAttribute('aria-pressed',String(userPaused));autoplayButton.setAttribute('aria-label',userPaused?'Продолжить анонсы':'Приостановить анонсы');$('use',autoplayButton).setAttribute('href',userPaused?'#play':'#pause');
